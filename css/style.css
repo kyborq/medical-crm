@@ -1,0 +1,90 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+input {
+  outline: none;
+  box-sizing: border-box;
+  display: block;
+  font-size: 16px;
+}
+
+.auth {
+  display: flex;
+  height: 100vh;
+}
+
+.auth-box {
+  margin: auto;
+  width: 250px;
+}
+
+.auth-header {
+  margin-bottom: 32px;
+  display: flex;
+}
+
+.auth-title {
+  font-size: 24px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.logo {
+  margin: auto;
+  /* float: left; */
+  overflow: hidden;
+}
+
+.logo-part-blue {
+  float: left;
+  display: block;
+  padding: 8px;
+  background-color: #5ba1f1;
+  color: white;
+}
+
+.logo-part {
+  float: left;
+  display: block;
+  padding: 7px;
+  border: 1px solid #5ba1f1;
+  color: #407cc1;
+}
+
+.field {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #e2e2e2;
+  transition: 250ms border-color;
+}
+
+.field:focus {
+  border: 1px solid #5ba1f1;
+  transition: 250ms border-color;
+}
+
+.button {
+  margin-top: 32px;
+  padding: 8px;
+  background-color: white;
+  border: 1px solid #5ba1f1;
+  cursor: pointer;
+  color: #407cc1;
+  transition: 250ms background-color, 250ms color;
+}
+
+.button:active {
+  background-color: #5ba1f1;
+  color: #ffffff;
+  transition: 250ms background-color, 250ms color;
+}
+
+.field-label {
+  font-size: 14px;
+  margin-bottom: 4px;
+  display: block;
+  color: #c1c1c1;
+}
