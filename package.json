@@ -1,0 +1,35 @@
+{
+  "name": "medical-crm",
+  "version": "0.0.1",
+  "description": "Medical CRM App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-dev": "webpack --mode development --watch",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyborq/medical-crm.git"
+  },
+  "author": "Podyganov K",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kyborq/medical-crm/issues"
+  },
+  "homepage": "https://github.com/kyborq/medical-crm#readme",
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.4.2",
+    "style-loader": "^1.1.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
