@@ -1,32 +1,57 @@
 {
-  "name": "medical-crm",
-  "version": "0.0.1",
-  "description": "Medical CRM App",
+  "name": "npm-automation-env",
+  "version": "1.1.0",
+  "description": "",
   "main": "index.js",
+  "watch": {
+    "validate-html": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "html",
+      "quiet": true,
+      "legacyWatch": true
+    },
+    "stylelint": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "css"
+    },
+    "jshint": "src/"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build-dev": "webpack --mode development --watch",
-    "build": "webpack --mode production"
+    "server": "live-server src",
+    "validate-html": "html-validate src",
+    "stylelint": "stylelint src/**/*.css",
+    "jshint": "jshint src/",
+    "watch": "npm-watch",
+    "dev-mode": "npm-run-all --parallel server watch",
+    "postinstall": "npm i -g live-server html-validate jshint",
+    "run-webpack": "webpack --mode production",
+    "build": "npm-run-all validate-html jshint stylelint run-webpack"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kyborq/medical-crm.git"
-  },
-  "author": "Podyganov K",
+  "browserslist": "> 0.25%, not dead",
+  "author": "Kalagin Ivan",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kyborq/medical-crm/issues"
-  },
-  "homepage": "https://github.com/kyborq/medical-crm#readme",
   "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
-    "@babel/preset-react": "^7.9.4",
-    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.4.2",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "npm-run-all": "^4.1.5",
+    "npm-watch": "^0.6.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "style-loader": "^1.1.3",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
+    "stylelint": "^12.0.0",
+    "stylelint-config-standard": "^19.0.0",
+    "terser-webpack-plugin": "^2.3.4",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "babel-loader": "^8.1.0"
   },
   "dependencies": {
     "react": "^16.13.1",
