@@ -22,14 +22,14 @@
   },
   "scripts": {
     "server": "live-server src",
-    "validate-html": "html-validate src",
     "stylelint": "stylelint src/**/*.css",
     "jshint": "jshint src/",
     "watch": "npm-watch",
     "dev-mode": "npm-run-all --parallel server watch",
     "postinstall": "npm i -g live-server html-validate jshint",
     "run-webpack": "webpack --mode production",
-    "build": "npm-run-all validate-html jshint stylelint run-webpack"
+    "build": "npm-run-all validate-html jshint stylelint run-webpack",
+    "webpack-server": "webpack-dev-server --mode development --open --hot"
   },
   "browserslist": "> 0.25%, not dead",
   "author": "Kalagin Ivan",
@@ -48,6 +48,7 @@
     "terser-webpack-plugin": "^2.3.4",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.3",
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
@@ -55,6 +56,7 @@
   },
   "dependencies": {
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2"
   }
 }
