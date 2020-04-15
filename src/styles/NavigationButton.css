@@ -1,0 +1,16 @@
+.nav-button {
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.button-icon {
+  margin: 8px;
+  display: block;
+  float: left;
+}
+
+.button-label {
+  font-size: 14px;
+  margin: 10px;
+  float: left;
+}

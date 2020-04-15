@@ -55,8 +55,10 @@
     "babel-loader": "^8.1.0"
   },
   "dependencies": {
+    "file-loader": "^6.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.1.2"
+    "react-router-dom": "^5.1.2",
+    "url-loader": "^4.1.0"
   }
 }
