@@ -1,0 +1,56 @@
+.auth-form {
+  margin: auto;
+  width: 100%;
+}
+
+.form-title {
+  margin: 0;
+  margin-bottom: 32px;
+  font-size: 24px;
+  text-align: center;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+.field-label {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 8px;
+  color: #b3b3b3;
+}
+
+.form-field {
+  width: 100%;
+  margin-bottom: 16px;
+  padding: 12px;
+  border: 1px solid #f7f7f7;
+  border-radius: 8px;
+  background: #f7f7f7;
+}
+
+.form-field::placeholder {
+  color: #cccccc;
+  transition: 250ms color;
+}
+
+.form-field:focus::placeholder {
+  color: #e6e6e6;
+  transition: 250ms color;
+}
+
+.form-button {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #23a2da;
+  border-radius: 8px;
+  background: #23a2da;
+  color: white;
+  cursor: pointer;
+  transition: 250ms background-color, 250ms border-color;
+}
+
+.form-button:active {
+  background-color: #2094c7;
+  border-color: #2094c7;
+  transition: 250ms background-color, 250ms border-color;
+}
