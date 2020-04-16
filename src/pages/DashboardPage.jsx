@@ -1,8 +1,10 @@
 import React from 'react';
 
 import { Sidebar } from '../components/Sidebar';
-import { Container } from '../components/Container';
+import { Wrap } from '../components/Wrap';
 import { Header } from '../components/Header';
+import { Content } from '../components/Content';
+import { ToolsBar } from '../components/ToolsBar';
 
 import './DashboardPage.css';
 
@@ -11,9 +13,13 @@ export function DashboardPage() {
     <div className='dashboard-page'>
       <Sidebar />
 
-      <Container>
-        <Header />
-      </Container>
+      <Wrap>
+        <Header title='Главная' />
+
+        <Content></Content>
+
+        <ToolsBar title='Управление'></ToolsBar>
+      </Wrap>
     </div>
   );
 }

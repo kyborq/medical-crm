@@ -1,7 +1,7 @@
 import React from 'react';
 
-import './Container.css';
+import './Wrap.css';
 
-export function Container(props) {
+export function Wrap(props) {
   return <div className='main-wrap'>{props.children}</div>;
 }
