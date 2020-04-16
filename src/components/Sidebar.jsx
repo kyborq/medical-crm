@@ -7,11 +7,12 @@ import { Navigation } from './Navigation';
 export function Sidebar() {
   return (
     <div className='left-sidebar'>
-      <Navigation />
+      <div className='sidebar-content'>
+        <h1 className='text-logo'>
+          Medical <span className='text-logo-part'>CRM</span>
+        </h1>
 
-      <div className='footer'>
-        <a href='#'>Ссылка</a>
-        <a href='#'>Ссылка</a>
+        <Navigation />
       </div>
     </div>
   );

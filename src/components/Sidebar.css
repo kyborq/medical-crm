@@ -2,4 +2,22 @@
   width: 350px;
   height: 100%;
   position: fixed;
+  border-right: 1px solid #f2f2f2;
+  display: flex;
+}
+
+.sidebar-content {
+  margin: auto;
+  width: 100%;
+}
+
+.text-logo {
+  margin: 0;
+  font-size: 32px;
+  font-weight: normal;
+  text-align: center;
+}
+
+.text-logo-part {
+  color: #23a2da;
 }
