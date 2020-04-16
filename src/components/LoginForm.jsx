@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../styles/LoginForm.css';
+import './LoginForm.css';
 
 export function LoginForm() {
   return (

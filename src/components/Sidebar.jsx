@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../styles/Sidebar.css';
+import './Sidebar.css';
 
 import { Navigation } from './Navigation';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../styles/NavigationButton.css';
+import './NavigationButton.css';
 
 export function NavigationButton(props) {
   return (

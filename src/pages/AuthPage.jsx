@@ -2,7 +2,7 @@ import React from 'react';
 
 import { LoginForm } from '../components/LoginForm';
 
-import '../styles/AuthPage.css';
+import './AuthPage.css';
 
 export function AuthPage() {
   return (

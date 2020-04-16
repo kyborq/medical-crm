@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Sidebar } from '../components/Sidebar';
 
-import '../styles/DashboardPage.css';
+import './DashboardPage.css';
 
 export function DashboardPage() {
   return (
