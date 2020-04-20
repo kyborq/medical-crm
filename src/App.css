@@ -1,11 +1,7 @@
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
-}
-
-input {
-  outline: none;
-  box-sizing: border-box;
+  background-color: #f2f2f2;
 }
 
 #app {

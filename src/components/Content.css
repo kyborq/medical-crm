@@ -1,4 +1,10 @@
 .content {
+  /* width: calc(100% - 400px - 64px - 32px); */
   width: 50%;
   float: left;
+  padding: 16px;
+  /* background-color: white; */
+  /* border-radius: 16px; */
+  /* box-shadow: 0 0 5px #e2e2e2; */
+  overflow: hidden;
 }

@@ -2,27 +2,30 @@ import React from 'react';
 
 import './StuffPage.css';
 
-import { Sidebar } from '../components/Sidebar';
-import { Wrap } from '../components/Wrap';
+import { Sidebar } from '../components/sidebar/Sidebar';
 import { Header } from '../components/Header';
 import { Content } from '../components/Content';
 import { ToolsBar } from '../components/ToolsBar';
 
+import { Card } from '../components/Card';
+
 export function StuffPage() {
   return (
-    <div className='stuff-page'>
+    <div className="stuff-page">
       <Sidebar />
 
-      <Wrap>
-        <Header title='Управление персоналом' />
+      <div className="main-wrap">
+        <Header title="Персонал" />
 
-        <Content></Content>
+        <Content>
+          <Card title="John Smith" />
+          <Card title="John Smith" />
+          <Card title="John Smith" />
+          <Card title="John Smith" />
+        </Content>
 
-        <ToolsBar title='Добавить сотрудника'>
-          <input type='text' className='form-field' placeholder='ФИО' />
-          <input type='text' className='form-field' placeholder='Возраст' />
-        </ToolsBar>
-      </Wrap>
+        <ToolsBar title="Новый"></ToolsBar>
+      </div>
     </div>
   );
 }

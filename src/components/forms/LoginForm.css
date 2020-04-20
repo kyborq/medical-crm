@@ -1,6 +1,10 @@
 .auth-form {
   margin: auto;
   width: 100%;
+  background-color: white;
+  padding: 32px 24px;
+  border-radius: 16px;
+  box-shadow: 0 0 5px #e2e2e2;
 }
 
 .form-title {
@@ -26,6 +30,8 @@
   border: 1px solid #f7f7f7;
   border-radius: 8px;
   background: #f7f7f7;
+  outline: none;
+  box-sizing: border-box;
 }
 
 .form-field::placeholder {
@@ -46,6 +52,8 @@
   background: #23a2da;
   color: white;
   cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
   transition: 250ms background-color, 250ms border-color;
 }
 
