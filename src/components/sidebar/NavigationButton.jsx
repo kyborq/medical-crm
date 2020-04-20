@@ -4,9 +4,9 @@ import './NavigationButton.css';
 
 export function NavigationButton(props) {
   return (
-    <div className='nav-button'>
-      <span className='material-icons button-icon'>{props.icon}</span>
-      <span className='button-label'>{props.label}</span>
+    <div className="nav-button">
+      <span className="material-icons button-icon">{props.icon}</span>
+      <span className="button-label">{props.label}</span>
     </div>
   );
 }
