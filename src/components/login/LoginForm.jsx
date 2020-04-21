@@ -46,7 +46,7 @@ export function LoginForm() {
       <button
         className='form-button'
         onClick={() => {
-          isFormValid(login, password);
+          isFormValid(login, password) && location.href('/dashboard');
         }}
       >
         Войти

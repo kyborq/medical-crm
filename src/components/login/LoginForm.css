@@ -63,16 +63,6 @@
   transition: 250ms background-color, 250ms border-color;
 }
 
-.valid {
-  margin-top: 16px;
-  padding: 16px;
-  border: 1px solid #81e45b;
-  background-color: #e7fae0;
-  color: #73be55;
-  border-radius: 8px;
-  font-size: 14px;
-}
-
 .not-valid {
   margin-top: 16px;
   padding: 10px;
