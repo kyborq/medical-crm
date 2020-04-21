@@ -3,4 +3,5 @@
   margin-left: 350px;
   padding: 0 32px;
   overflow: hidden;
+  overflow-y: auto;
 }
