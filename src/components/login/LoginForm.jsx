@@ -11,49 +11,48 @@ export function LoginForm() {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
-  const isFormValid = () => {
+  const isFormValid = (login, password) => {
     if (login === Data.login && password === Data.password) {
-      // location.pathname = '/stuff';
-      return <div className="valid">Данные совпадают!</div>;
+      return true;
     } else {
-      return <div className="not-valid">Ошибка входа. Не валидные данные!</div>;
+      return false;
     }
   };
 
   return (
-    <div className="auth-form">
-      <h2 className="form-title">Войти в систему</h2>
+    <div className='auth-form'>
+      <h2 className='form-title'>Войти в систему</h2>
 
-      <span className="field-label">Логин:</span>
+      <span className='field-label'>Логин:</span>
       <input
-        type="text"
-        className="form-field"
-        placeholder="Имя пользователя"
+        type='text'
+        className='form-field'
+        placeholder='Имя пользователя'
         onInput={(e) => {
           setLogin(e.target.value);
         }}
       />
 
-      <span className="field-label">Пароль:</span>
+      <span className='field-label'>Пароль:</span>
       <input
-        type="password"
-        className="form-field"
-        placeholder="Пароль"
+        type='password'
+        className='form-field'
+        placeholder='Пароль'
         onInput={(e) => {
           setPassword(e.target.value);
         }}
       />
 
-      <input
-        type="submit"
-        value="Войти"
-        className="form-button"
+      <button
+        className='form-button'
         onClick={() => {
-          isFormValid();
+          isFormValid(login, password);
         }}
-      />
+      >
+        Войти
+      </button>
 
-      {isFormValid()}
+      {!isFormValid(login, password) && <div className='not-valid'>Ошибка входа. Не валидные данные!</div>}
     </div>
   );
 }

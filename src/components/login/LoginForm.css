@@ -71,7 +71,6 @@
   color: #73be55;
   border-radius: 8px;
   font-size: 14px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .not-valid {
@@ -82,5 +81,5 @@
   color: #c25b5b;
   border-radius: 8px;
   font-size: 14px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
 }
