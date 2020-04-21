@@ -12,9 +12,10 @@
   transition: 250ms color, 250ms background-color;
 }
 
-.nav-button.active {
+.nav-active .nav-button {
   background-color: #ebf6fb;
   color: #87ccea;
+  transition: 250ms color, 250ms background-color;
 }
 
 .button-icon {
