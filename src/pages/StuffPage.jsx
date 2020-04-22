@@ -8,6 +8,11 @@ import { Content } from '../components/Content';
 import { ToolsBar } from '../components/ToolsBar';
 import { Table, TableRow, TableHeader } from '../components/Table';
 
+const StuffData = [
+  ['Иванов Иван Иванович', 'Врач', '20 минут'],
+  ['John Smith', 'Педиатр', '5 минут'],
+];
+
 export function StuffPage() {
   return (
     <div className='stuff-page'>
@@ -18,18 +23,11 @@ export function StuffPage() {
 
         <Content>
           <p>Список персонала организации:</p>
-          {/* <table>
-            <th>
-              <td>ФИО</td>
-              <td>Специализация</td>
-              <td>Время приёма</td>
-            </th>
-          </table> */}
           <Table>
             <TableHeader values={['ФИО', 'Специализация', 'Время приёма']} />
-            <TableRow values={['banana', 'apple', 'grape']} />
-            <TableRow values={['banana', 'apple', 'grape']} />
-            <TableRow values={['banana', 'apple', 'grape']} />
+            {StuffData.map((stuff) => (
+              <TableRow values={[stuff[0], stuff[1], stuff[2]]} />
+            ))}
           </Table>
         </Content>
 
