@@ -1,0 +1,17 @@
+.right-sidebar {
+  width: 300px;
+  /* margin-top: 16px; */
+  float: right;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 0 5px #e2e2e2;
+  background: white;
+}
+
+.sidebar-title {
+  margin: 0;
+  font-size: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f2f2f2;
+  margin-bottom: 16px;
+}
