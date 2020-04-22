@@ -12,7 +12,7 @@ export function LoginForm() {
   const [password, setPassword] = useState('');
 
   const isFormValid = (login, password) => {
-    if (login === Data.login && password === Data.password) {
+    if (login === Data.login && password === Data.password && login.length < 20 && password.length > 7) {
       return true;
     } else {
       return false;
