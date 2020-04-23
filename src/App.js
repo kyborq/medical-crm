@@ -5,6 +5,7 @@ import { DashboardPage } from './pages/DashboardPage';
 import { AuthPage } from './pages/AuthPage';
 import { ErrorPage } from './pages/ErrorPage';
 import { StuffPage } from './pages/StuffPage';
+import { ServicesPage } from './pages/ServicesPage';
 
 import './App.css';
 
@@ -22,6 +23,10 @@ export default function App() {
 
         <Route path="/stuff">
           <StuffPage />
+        </Route>
+
+        <Route path="/services">
+          <ServicesPage />
         </Route>
 
         <Route>
