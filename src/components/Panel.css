@@ -1,0 +1,18 @@
+.panel {
+  float: left;
+  width: calc(30% - 16px);
+  padding: 24px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 0 5px #e2e2e2;
+  margin-bottom: 16px;
+}
+
+.panel-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e1e7ed;
+}

@@ -4,17 +4,21 @@ import './DashboardPage.css';
 
 import { Sidebar } from '../components/sidebar/Sidebar';
 import { Header } from '../components/Header';
-import { Content } from '../components/Content';
+import { Panel } from '../components/Panel';
 
 export function DashboardPage() {
   return (
     <div className='dashboard-page'>
       <Sidebar />
 
-      <div className='main-wrap'>
+      <div className='wrap'>
         <Header title='Главная' />
 
-        <Content></Content>
+        <div className='container'>
+          <div className='content'></div>
+
+          <Panel title='Инструменты' />
+        </div>
       </div>
     </div>
   );

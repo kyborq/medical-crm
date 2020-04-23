@@ -1,15 +1,11 @@
 .header {
+  margin: 0 32px;
   margin-top: 64px;
-  padding: 24px;
-  /* margin-bottom: 32px; */
-  border-radius: 16px;
-  /* background: white; */
-  /* box-shadow: 0 0 5px #e2e2e2; */
 }
 
 .page-title {
-  margin: 0;
   font-size: 32px;
-  font-weight: normal;
-  /* text-transform: uppercase; */
+  font-weight: lighter;
+  color: #acb7bf;
+  margin: 0;
 }

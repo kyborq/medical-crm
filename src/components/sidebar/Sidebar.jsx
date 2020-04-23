@@ -2,16 +2,14 @@ import React from 'react';
 
 import './Sidebar.css';
 
+import { Logo } from './Logo';
 import { Navigation } from './Navigation';
 
 export function Sidebar() {
   return (
-    <div className='left-sidebar'>
-      <div className='sidebar-content'>
-        <h1 className='text-logo'>
-          Medical <span className='text-logo-part'>CRM</span>
-        </h1>
-
+    <div className='sidebar'>
+      <div className='sidebar-container'>
+        <Logo />
         <Navigation />
       </div>
     </div>

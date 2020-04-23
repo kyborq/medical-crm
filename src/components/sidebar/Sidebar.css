@@ -1,25 +1,15 @@
-.left-sidebar {
+.sidebar {
   width: 350px;
-  height: 100%;
-  position: fixed;
-  box-shadow: 0 0 5px #e2e2e2;
-  display: flex;
+  height: 100vh;
   background-color: white;
-  border-radius: 0 16px 16px 0;
+  box-shadow: 0 0 5px #e2e2e2;
+  overflow: hidden;
+  position: fixed;
+  display: flex;
+  border-radius: 0 32px 32px 0;
 }
 
-.sidebar-content {
+.sidebar-container {
   margin: auto;
   width: 100%;
-}
-
-.text-logo {
-  margin: 0;
-  font-size: 32px;
-  font-weight: normal;
-  text-align: center;
-}
-
-.text-logo-part {
-  color: #23a2da;
 }
