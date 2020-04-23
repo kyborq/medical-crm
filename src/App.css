@@ -4,7 +4,7 @@ body {
   background-color: #f2f2f2;
 }
 
-#app {
+#root {
   width: 100%;
   height: 100vh;
   overflow: hidden;

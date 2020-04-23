@@ -6,9 +6,11 @@ import { NavigationButton } from './NavigationButton';
 
 export function Navigation() {
   return (
-    <div className='sidebar-navigation'>
-      <NavigationButton icon='dashboard' label='Главная' link='/dashboard' />
-      <NavigationButton icon='people' label='Персонал' link='/stuff' />
+    <div className='navigation'>
+      <NavigationButton link='/dashboard' icon='dashboard' label='Главная' />
+      <NavigationButton link='/stuff' icon='person' label='Персонал' />
+      <NavigationButton link='/clients' icon='people' label='Клиенты' />
+      <NavigationButton link='/services' icon='assignment' label='Услуги' />
     </div>
   );
 }

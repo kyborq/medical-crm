@@ -3,29 +3,25 @@ import React from 'react';
 import './Table.css';
 
 export function TableHeader({ values }) {
-  const valuesItems = values.map((value) => (
-    <th className='table-cell' key={value}>
+  const valueItems = values.map((value) => (
+    <div key={value} className='flex-table-cell'>
       {value}
-    </th>
+    </div>
   ));
 
-  return <tr className='table-header'>{valuesItems}</tr>;
+  return <div className='flex-table-header'>{valueItems}</div>;
 }
 
 export function TableRow({ values }) {
-  const valuesItems = values.map((value) => (
-    <td className='table-cell' key={value}>
+  const valueItems = values.map((value) => (
+    <div key={value} className='flex-table-cell'>
       {value}
-    </td>
+    </div>
   ));
 
-  return <tr className='table-row'>{valuesItems}</tr>;
+  return <div className='flex-table-row'>{valueItems}</div>;
 }
 
 export function Table({ children }) {
-  return (
-    <table className='table'>
-      <tbody>{children}</tbody>
-    </table>
-  );
+  return <div className='flex-table'>{children}</div>;
 }

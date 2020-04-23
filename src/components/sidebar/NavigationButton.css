@@ -1,30 +1,32 @@
 .nav-button {
-  padding: 12px;
+  display: block;
   overflow: hidden;
-  cursor: pointer;
-  color: #d7e4ea;
-  border-radius: 8px;
+  padding: 12px;
+  color: #c1c8cc;
+  border-radius: 16px;
   transition: 250ms color, 250ms background-color;
 }
 
 .nav-button:hover {
-  color: #adc2cc;
+  background-color: #eff5f9;
+  color: #8eb5cc;
   transition: 250ms color, 250ms background-color;
 }
 
-.nav-active .nav-button {
-  background-color: #ebf6fb;
-  color: #87ccea;
-  transition: 250ms color, 250ms background-color;
+.nav-button.active {
+  background-color: #2ba9e6;
+  color: white;
 }
 
 .button-icon {
-  margin-right: 8px;
   display: block;
   float: left;
+  margin-right: 4px;
 }
 
 .button-label {
-  margin: 1px;
+  display: block;
   float: left;
+  font-size: 14px;
+  margin: 2px;
 }

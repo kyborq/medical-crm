@@ -4,9 +4,11 @@ import './StuffPage.css';
 
 import { Sidebar } from '../components/sidebar/Sidebar';
 import { Header } from '../components/Header';
-import { Content } from '../components/Content';
-import { ToolsBar } from '../components/ToolsBar';
+import { Panel } from '../components/Panel';
+
 import { Table, TableRow, TableHeader } from '../components/Table';
+
+import { StuffForm } from '../components/forms/StuffForm';
 
 const StuffData = [
   ['Иванов Иван Иванович', 'Врач', '20 минут'],
@@ -15,28 +17,26 @@ const StuffData = [
 
 export function StuffPage() {
   return (
-    <div className='stuff-page'>
+    <div className="stuff-page">
       <Sidebar />
 
-      <div className='main-wrap'>
-        <Header title='Персонал' />
+      <div className="wrap">
+        <Header title="Персонал" />
 
-        <Content>
-          <p>Список персонала организации:</p>
-          <Table>
-            <TableHeader values={['ФИО', 'Специализация', 'Время приёма']} />
-            {StuffData.map((stuff) => (
-              <TableRow values={[stuff[0], stuff[1], stuff[2]]} />
-            ))}
-          </Table>
-        </Content>
+        <div className="container">
+          <div className="content">
+            <Table>
+              <TableHeader values={['ФИО', 'Специализация', 'Время приема']} />
+              {StuffData.map((stuff) => (
+                <TableRow key={stuff[0]} values={[stuff[0], stuff[1], stuff[2]]} />
+              ))}
+            </Table>
+          </div>
 
-        <ToolsBar title='Новый'>
-          <input type='text' className='form-field' placeholder='ФИО' />
-          <input type='text' className='form-field' placeholder='Специализация' />
-          <input type='text' className='form-field' placeholder='Время приёма' />
-          <button className='form-button'>Добавить</button>
-        </ToolsBar>
+          <Panel title="Добавить">
+            <StuffForm />
+          </Panel>
+        </div>
       </div>
     </div>
   );

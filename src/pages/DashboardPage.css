@@ -1,0 +1,15 @@
+.wrap {
+  margin-left: 350px;
+  overflow: hidden;
+}
+
+.container {
+  overflow: hidden;
+  padding: 32px;
+}
+
+.content {
+  float: left;
+  margin-right: 32px;
+  width: calc(70% - 64px);
+}
