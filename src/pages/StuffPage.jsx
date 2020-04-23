@@ -26,7 +26,7 @@ export function StuffPage() {
           <Table>
             <TableHeader values={['ФИО', 'Специализация', 'Время приёма']} />
             {StuffData.map((stuff) => (
-              <TableRow values={[stuff[0], stuff[1], stuff[2]]} />
+              <TableRow key={stuff[0]} values={[stuff[0], stuff[1], stuff[2]]} />
             ))}
           </Table>
         </Content>
