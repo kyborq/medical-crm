@@ -5,6 +5,11 @@ import './ServicesPage.css';
 import { Sidebar } from '../components/sidebar/Sidebar';
 import { Header } from '../components/Header';
 import { Panel } from '../components/Panel';
+import { Wrap } from '../components/containers/Wrap';
+import { Container } from '../components/containers/Container';
+import { Content } from '../components/containers/Content';
+import { Page } from '../components/containers/Page';
+import { RightSidebar } from '../components/containers/RightSidebar';
 
 import { Table, TableRow, TableHeader } from '../components/Table';
 
@@ -15,14 +20,14 @@ const ServicesData = [
 
 export function ServicesPage() {
   return (
-    <div className="services-page">
+    <Page>
       <Sidebar />
 
-      <div className="wrap">
+      <Wrap>
         <Header title="Услуги" />
 
-        <div className="container">
-          <div className="content">
+        <Container>
+          <Content>
             <Table>
               <TableHeader
                 values={['Название услуги', 'Цена', 'Продолжительность (мин)']}
@@ -34,11 +39,13 @@ export function ServicesPage() {
                 />
               ))}
             </Table>
-          </div>
-
-          <Panel title="Добавить услугу"></Panel>
-        </div>
-      </div>
-    </div>
+          </Content>
+          
+          <RightSidebar>
+            <Panel title="Добавить услугу"></Panel>
+          </RightSidebar>
+        </Container>
+      </Wrap>
+    </Page>
   );
 }
