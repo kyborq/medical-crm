@@ -9,6 +9,7 @@ import { Wrap } from '../components/Wrap';
 import { Container } from '../components/Container';
 import { Content } from '../components/Content';
 import { Page } from '../components/Page';
+import { RightSidebar } from '../components/RightSidebar';
 
 export function DashboardPage() {
   return (
@@ -21,7 +22,9 @@ export function DashboardPage() {
         <Container>
           <Content></Content>
 
-          <Panel title='Инструменты' />
+          <RightSidebar>
+            <Panel title='Инструменты' />
+          </RightSidebar>
         </Container>
       </Wrap>
     </Page>
