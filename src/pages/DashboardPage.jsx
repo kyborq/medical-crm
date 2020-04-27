@@ -5,11 +5,11 @@ import './DashboardPage.css';
 import { Sidebar } from '../components/sidebar/Sidebar';
 import { Header } from '../components/Header';
 import { Panel } from '../components/Panel';
-import { Wrap } from '../components/Wrap';
-import { Container } from '../components/Container';
-import { Content } from '../components/Content';
-import { Page } from '../components/Page';
-import { RightSidebar } from '../components/RightSidebar';
+import { Wrap } from '../components/containers/Wrap';
+import { Container } from '../components/containers/Container';
+import { Content } from '../components/containers/Content';
+import { Page } from '../components/containers/Page';
+import { RightSidebar } from '../components/containers/RightSidebar';
 
 export function DashboardPage() {
   return (
