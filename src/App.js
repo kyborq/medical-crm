@@ -5,6 +5,7 @@ import { DashboardPage } from './pages/DashboardPage';
 import { AuthPage } from './pages/AuthPage';
 import { ErrorPage } from './pages/ErrorPage';
 import { StuffPage } from './pages/StuffPage';
+import { ServicesPage } from './pages/ServicesPage';
 import { ClientsPage } from './pages/ClientsPage';
 
 import './App.css';
@@ -25,6 +26,10 @@ export default function App() {
           <StuffPage />
         </Route>
 
+        <Route path="/services">
+          <ServicesPage />
+        </Route>
+    
         <Route path='/clients'>
           <ClientsPage />
         </Route>
