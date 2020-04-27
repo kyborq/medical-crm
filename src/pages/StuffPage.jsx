@@ -2,7 +2,7 @@ import React from 'react';
 
 import './StuffPage.css';
 
-import { Sidebar } from '../components/sidebar/Sidebar';
+import { LeftSidebar } from '../components/sidebar/LeftSidebar';
 import { Header } from '../components/Header';
 import { Panel } from '../components/Panel';
 import { Wrap } from '../components/Wrap';
@@ -13,7 +13,7 @@ import { RightSidebar } from '../components/RightSidebar';
 
 import { Table, TableRow, TableHeader } from '../components/Table';
 
-import { StuffForm } from '../components/StuffForm';
+import { StuffForm } from '../components/forms/StuffForm';
 
 const StuffData = [
   ['Иванов Иван Иванович', 'Врач', '20 минут'],
@@ -23,7 +23,7 @@ const StuffData = [
 export function StuffPage() {
   return (
     <Page>
-      <Sidebar />
+      <LeftSidebar />
 
       <Wrap>
         <Header title='Персонал' />
