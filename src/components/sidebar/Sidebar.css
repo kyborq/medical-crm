@@ -1,10 +1,9 @@
 .sidebar {
-  width: 350px;
+  width: 400px;
   height: 100vh;
   background-color: white;
   box-shadow: 0 0 5px #e2e2e2;
   overflow: hidden;
-  position: fixed;
   display: flex;
   border-radius: 0 32px 32px 0;
 }

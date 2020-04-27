@@ -6,7 +6,7 @@ import './AuthPage.css';
 
 export function AuthPage() {
   return (
-    <div className="auth-page">
+    <div className='auth-page'>
       <LoginForm />
     </div>
   );
