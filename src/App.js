@@ -5,6 +5,7 @@ import { DashboardPage } from './pages/DashboardPage';
 import { AuthPage } from './pages/AuthPage';
 import { ErrorPage } from './pages/ErrorPage';
 import { StuffPage } from './pages/StuffPage';
+import { ClientsPage } from './pages/ClientsPage';
 
 import './App.css';
 
@@ -12,20 +13,24 @@ export default function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/auth">
+        <Route path='/auth'>
           <AuthPage />
         </Route>
 
-        <Route path="/dashboard">
+        <Route path='/dashboard'>
           <DashboardPage />
         </Route>
 
-        <Route path="/stuff">
+        <Route path='/stuff'>
           <StuffPage />
         </Route>
 
+        <Route path='/clients'>
+          <ClientsPage />
+        </Route>
+
         <Route>
-          <ErrorPage error="404" message="Not found" />
+          <ErrorPage error='404' message='Not found' />
         </Route>
       </Switch>
     </BrowserRouter>

@@ -13,34 +13,35 @@ import { RightSidebar } from '../components/containers/RightSidebar';
 
 import { Table, TableRow, TableHeader } from '../components/Table';
 
-import { StuffForm } from '../components/forms/StuffForm';
+import { ClientsForm } from '../components/forms/ClientsForm';
 
 const StuffData = [
-  ['Иванов Иван Иванович', 'Врач', '20 минут'],
-  ['John Smith', 'Педиатр', '5 минут'],
+  ['Иванов Иван Иванович', '123', '20 ноября 1987', '8(800)555-35-35'],
+  ['John Smith', '123', '20 ноября 1987', '8(800)555-35-35'],
+  ['Иванов Иван Иванович', '123', '20 ноября 1987', '8(800)555-35-35'],
 ];
 
-export function StuffPage() {
+export function ClientsPage() {
   return (
     <Page>
       <Sidebar />
 
       <Wrap>
-        <Header title='Персонал' />
+        <Header title='Клиенты' />
 
         <Container>
           <Content>
             <Table>
-              <TableHeader values={['ФИО', 'Специализация', 'Время приема']} />
+              <TableHeader values={['ФИО', 'Данные о прописке', 'Дата рождения', 'Номер телефона']} />
               {StuffData.map((stuff) => (
-                <TableRow key={stuff[0]} values={[stuff[0], stuff[1], stuff[2]]} />
+                <TableRow key={stuff[0]} values={[stuff[0], stuff[1], stuff[2], stuff[3]]} />
               ))}
             </Table>
           </Content>
 
           <RightSidebar>
             <Panel title='Добавить'>
-              <StuffForm />
+              <ClientsForm />
             </Panel>
           </RightSidebar>
         </Container>

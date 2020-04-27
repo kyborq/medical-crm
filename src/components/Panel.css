@@ -1,6 +1,4 @@
 .panel {
-  float: left;
-  width: calc(30% - 16px);
   padding: 24px;
   background-color: white;
   border-radius: 16px;
