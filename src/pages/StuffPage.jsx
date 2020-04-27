@@ -5,10 +5,14 @@ import './StuffPage.css';
 import { Sidebar } from '../components/sidebar/Sidebar';
 import { Header } from '../components/Header';
 import { Panel } from '../components/Panel';
+import { Wrap } from '../components/Wrap';
+import { Container } from '../components/Container';
+import { Content } from '../components/Content';
+import { Page } from '../components/Page';
 
 import { Table, TableRow, TableHeader } from '../components/Table';
 
-import { StuffForm } from '../components/forms/StuffForm';
+import { StuffForm } from '../components/StuffForm';
 
 const StuffData = [
   ['Иванов Иван Иванович', 'Врач', '20 минут'],
@@ -17,27 +21,27 @@ const StuffData = [
 
 export function StuffPage() {
   return (
-    <div className="stuff-page">
+    <Page>
       <Sidebar />
 
-      <div className="wrap">
-        <Header title="Персонал" />
+      <Wrap>
+        <Header title='Персонал' />
 
-        <div className="container">
-          <div className="content">
+        <Container>
+          <Content>
             <Table>
               <TableHeader values={['ФИО', 'Специализация', 'Время приема']} />
               {StuffData.map((stuff) => (
                 <TableRow key={stuff[0]} values={[stuff[0], stuff[1], stuff[2]]} />
               ))}
             </Table>
-          </div>
+          </Content>
 
-          <Panel title="Добавить">
+          <Panel title='Добавить'>
             <StuffForm />
           </Panel>
-        </div>
-      </div>
-    </div>
+        </Container>
+      </Wrap>
+    </Page>
   );
 }

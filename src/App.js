@@ -13,24 +13,24 @@ export default function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/auth">
+        <Route path='/auth'>
           <AuthPage />
         </Route>
 
-        <Route path="/dashboard">
+        <Route path='/dashboard'>
           <DashboardPage />
         </Route>
 
-        <Route path="/stuff">
+        <Route path='/stuff'>
           <StuffPage />
         </Route>
 
-        <Route path="/clients">
-          <StuffPage />
+        <Route path='/clients'>
+          <ClientsPage />
         </Route>
 
         <Route>
-          <ErrorPage error="404" message="Not found" />
+          <ErrorPage error='404' message='Not found' />
         </Route>
       </Switch>
     </BrowserRouter>

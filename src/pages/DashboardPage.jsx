@@ -5,21 +5,25 @@ import './DashboardPage.css';
 import { Sidebar } from '../components/sidebar/Sidebar';
 import { Header } from '../components/Header';
 import { Panel } from '../components/Panel';
+import { Wrap } from '../components/Wrap';
+import { Container } from '../components/Container';
+import { Content } from '../components/Content';
+import { Page } from '../components/Page';
 
 export function DashboardPage() {
   return (
-    <div className='dashboard-page'>
+    <Page>
       <Sidebar />
 
-      <div className='wrap'>
+      <Wrap>
         <Header title='Главная' />
 
-        <div className='container'>
-          <div className='content'></div>
+        <Container>
+          <Content></Content>
 
           <Panel title='Инструменты' />
-        </div>
-      </div>
-    </div>
+        </Container>
+      </Wrap>
+    </Page>
   );
 }
