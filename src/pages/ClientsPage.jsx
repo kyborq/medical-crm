@@ -13,7 +13,7 @@ import { RightSidebar } from '../components/RightSidebar';
 
 import { Table, TableRow, TableHeader } from '../components/Table';
 
-import { ClientsForm } from '../components/ClientsForm';
+import { ClientsForm } from '../components/forms/ClientsForm';
 
 const StuffData = [
   ['Иванов Иван Иванович', '123', '20 ноября 1987', '8(800)555-35-35'],

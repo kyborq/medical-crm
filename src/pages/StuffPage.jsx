@@ -13,7 +13,7 @@ import { RightSidebar } from '../components/RightSidebar';
 
 import { Table, TableRow, TableHeader } from '../components/Table';
 
-import { StuffForm } from '../components/StuffForm';
+import { StuffForm } from '../components/forms/StuffForm';
 
 const StuffData = [
   ['Иванов Иван Иванович', 'Врач', '20 минут'],
