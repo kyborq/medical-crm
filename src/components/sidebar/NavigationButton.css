@@ -1,10 +1,11 @@
 .nav-button {
-  display: block;
+  display: flex;
   overflow: hidden;
   padding: 12px;
   color: #c1c8cc;
   border-radius: 16px;
   transition: 250ms color, 250ms background-color;
+  text-decoration: none;
 }
 
 .nav-button:hover {
@@ -19,14 +20,10 @@
 }
 
 .button-icon {
-  display: block;
-  float: left;
   margin-right: 4px;
 }
 
 .button-label {
-  display: block;
-  float: left;
   font-size: 14px;
   margin: 2px;
 }
