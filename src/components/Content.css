@@ -1,5 +1,5 @@
 .content {
   float: left;
   margin-right: 32px;
-  width: calc(70% - 64px);
+  width: 70%;
 }

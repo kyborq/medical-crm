@@ -9,6 +9,7 @@ import { Wrap } from '../components/Wrap';
 import { Container } from '../components/Container';
 import { Content } from '../components/Content';
 import { Page } from '../components/Page';
+import { RightSidebar } from '../components/RightSidebar';
 
 import { Table, TableRow, TableHeader } from '../components/Table';
 
@@ -38,9 +39,11 @@ export function ClientsPage() {
             </Table>
           </Content>
 
-          <Panel title='Добавить'>
-            <ClientsForm />
-          </Panel>
+          <RightSidebar>
+            <Panel title='Добавить'>
+              <ClientsForm />
+            </Panel>
+          </RightSidebar>
         </Container>
       </Wrap>
     </Page>

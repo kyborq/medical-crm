@@ -1,4 +1,5 @@
 .container {
-  overflow: hidden;
+  display: flex;
   padding: 32px;
+  flex-direction: row;
 }
