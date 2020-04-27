@@ -2,7 +2,7 @@ import React from 'react';
 
 import './StuffPage.css';
 
-import { LeftSidebar } from '../components/sidebar/LeftSidebar';
+import { Sidebar } from '../components/sidebar/Sidebar';
 import { Header } from '../components/Header';
 import { Panel } from '../components/Panel';
 import { Wrap } from '../components/Wrap';
@@ -13,7 +13,7 @@ import { RightSidebar } from '../components/RightSidebar';
 
 import { Table, TableRow, TableHeader } from '../components/Table';
 
-import { ClientsForm } from '../components/forms/ClientsForm';
+import { ClientsForm } from '../components/ClientsForm';
 
 const StuffData = [
   ['Иванов Иван Иванович', '123', '20 ноября 1987', '8(800)555-35-35'],
@@ -24,7 +24,7 @@ const StuffData = [
 export function ClientsPage() {
   return (
     <Page>
-      <LeftSidebar />
+      <Sidebar />
 
       <Wrap>
         <Header title='Клиенты' />

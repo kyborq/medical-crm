@@ -2,7 +2,7 @@ import React from 'react';
 
 import './DashboardPage.css';
 
-import { LeftSidebar } from '../components/sidebar/LeftSidebar';
+import { Sidebar } from '../components/sidebar/Sidebar';
 import { Header } from '../components/Header';
 import { Panel } from '../components/Panel';
 import { Wrap } from '../components/Wrap';
@@ -14,7 +14,7 @@ import { RightSidebar } from '../components/RightSidebar';
 export function DashboardPage() {
   return (
     <Page>
-      <LeftSidebar />
+      <Sidebar />
 
       <Wrap>
         <Header title='Главная' />

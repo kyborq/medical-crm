@@ -1,0 +1,29 @@
+.nav-button {
+  display: flex;
+  overflow: hidden;
+  padding: 12px;
+  color: #c1c8cc;
+  border-radius: 16px;
+  transition: 250ms color, 250ms background-color;
+  text-decoration: none;
+}
+
+.nav-button:hover {
+  background-color: #eff5f9;
+  color: #8eb5cc;
+  transition: 250ms color, 250ms background-color;
+}
+
+.nav-button.active {
+  background-color: #2ba9e6;
+  color: white;
+}
+
+.button-icon {
+  margin-right: 4px;
+}
+
+.button-label {
+  font-size: 14px;
+  margin: 2px;
+}
