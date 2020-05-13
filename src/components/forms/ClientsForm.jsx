@@ -9,11 +9,7 @@ export function ClientsForm() {
   const [phone, setPhone] = useState("");
 
   const isFormValid = (fio, registration, birthday, phone) => {
-    if (fio.split(" ").length === 3 && typeof registration === "string") {
-      return true;
-    } else {
-      return false;
-    }
+    // ...
   };
 
   return (
@@ -57,7 +53,6 @@ export function ClientsForm() {
       <button
         className="form-button"
         onClick={() => {
-          // isFormValid(fio, register, birthday, phone);
           console.log(
             "fio: " +
               fio +
@@ -68,6 +63,7 @@ export function ClientsForm() {
               ", phone: " +
               phone
           );
+          isFormValid(fio, register, birthday, phone);
         }}
       >
         Добавить

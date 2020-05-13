@@ -7,12 +7,8 @@ export function ServicesForm() {
   const [cost, setCost] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  const isFormValid = (serviceName, cost, duration) => {
-    if (typeof serviceName === "string") {
-      return true;
-    } else {
-      return false;
-    }
+  const isFormValid = (service, cost, duration) => {
+    // ...
   };
 
   return (
@@ -47,7 +43,6 @@ export function ServicesForm() {
       <button
         className="form-button"
         onClick={() => {
-          // isFormValid(service, cost, duration);
           console.log(
             "Сервис: " +
               service +
@@ -56,6 +51,7 @@ export function ServicesForm() {
               ", Продолжительность: " +
               duration
           );
+          isFormValid(service, cost, duration);
         }}
       >
         Добавить

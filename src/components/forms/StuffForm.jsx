@@ -7,6 +7,11 @@ export function StuffForm() {
   const [fio, setFio] = useState("");
   const [spec, setSpec] = useState("");
   const [dur, setDur] = useState(0);
+
+  const isFormValid = (fio, spec, dur) => {
+    // ...
+  };
+
   return (
     <div>
       <input
@@ -40,6 +45,7 @@ export function StuffForm() {
         className="form-button"
         onClick={() => {
           console.log("ФИО: " + fio + " Спец.: " + spec + " Время: " + dur);
+          isFormValid(fio, spec, dur);
         }}
       >
         Добавить
