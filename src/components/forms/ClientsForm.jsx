@@ -22,7 +22,8 @@ export function ClientsForm() {
         type="text"
         className="form-field"
         placeholder="ФИО"
-        onInput={(e) => {
+        value={fio}
+        onChange={(e) => {
           setFio(e.target.value);
         }}
       />
@@ -30,7 +31,8 @@ export function ClientsForm() {
         type="text"
         className="form-field"
         placeholder="Данные о прописке"
-        onInput={(e) => {
+        value={register}
+        onChange={(e) => {
           setRegister(e.target.value);
         }}
       />
@@ -38,7 +40,8 @@ export function ClientsForm() {
         type="text"
         className="form-field"
         placeholder="Дата рождения"
-        onInput={(e) => {
+        value={birthday}
+        onChange={(e) => {
           setBirthday(e.target.value);
         }}
       />
@@ -46,14 +49,25 @@ export function ClientsForm() {
         type="text"
         className="form-field"
         placeholder="Номер телефона"
-        onInput={(e) => {
+        value={phone}
+        onChange={(e) => {
           setPhone(e.target.value);
         }}
       />
       <button
         className="form-button"
         onClick={() => {
-          isFormValid(fio, register, birthday, phone);
+          // isFormValid(fio, register, birthday, phone);
+          console.log(
+            "fio: " +
+              fio +
+              ", reg: " +
+              register +
+              ", bday: " +
+              birthday +
+              ", phone: " +
+              phone
+          );
         }}
       >
         Добавить

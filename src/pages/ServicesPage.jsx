@@ -11,6 +11,8 @@ import { RightSidebar } from "../components/containers/RightSidebar";
 
 import { Table, TableRow, TableHeader } from "../components/Table";
 
+import { ServicesForm } from "../components/forms/ServicesForm";
+
 const ServicesData = [
   {
     id: 0,
@@ -50,7 +52,9 @@ export function ServicesPage() {
           </Content>
 
           <RightSidebar>
-            <Panel title="Добавить услугу"></Panel>
+            <Panel title="Добавить услугу">
+              <ServicesForm />
+            </Panel>
           </RightSidebar>
         </Container>
       </Wrap>
