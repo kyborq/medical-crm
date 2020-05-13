@@ -9,6 +9,9 @@ export function ServicesForm() {
 
   const isFormValid = (service, cost, duration) => {
     // ...
+    if (service !== "" && cost !== "" && duration !== "") {
+      // ...
+    }
   };
 
   return (

@@ -10,6 +10,9 @@ export function ClientsForm() {
 
   const isFormValid = (fio, registration, birthday, phone) => {
     // ...
+    if (fio !== "" && registration !== "" && birthday !== "" && phone !== "") {
+      // ...
+    }
   };
 
   return (

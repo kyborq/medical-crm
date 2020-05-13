@@ -10,6 +10,9 @@ export function StuffForm() {
 
   const isFormValid = (fio, spec, dur) => {
     // ...
+    if (fio !== "" && spec !== "" && dur !== "") {
+      // ...
+    }
   };
 
   return (
