@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./ServicesPage.css";
-
 import { Sidebar } from "../components/sidebar/Sidebar";
 import { Header } from "../components/Header";
 import { Panel } from "../components/Panel";

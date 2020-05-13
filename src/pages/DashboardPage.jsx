@@ -1,15 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import './DashboardPage.css';
-
-import { Sidebar } from '../components/sidebar/Sidebar';
-import { Header } from '../components/Header';
-import { Panel } from '../components/Panel';
-import { Wrap } from '../components/containers/Wrap';
-import { Container } from '../components/containers/Container';
-import { Content } from '../components/containers/Content';
-import { Page } from '../components/containers/Page';
-import { RightSidebar } from '../components/containers/RightSidebar';
+import { Sidebar } from "../components/sidebar/Sidebar";
+import { Header } from "../components/Header";
+import { Panel } from "../components/Panel";
+import { Wrap } from "../components/containers/Wrap";
+import { Container } from "../components/containers/Container";
+import { Content } from "../components/containers/Content";
+import { Page } from "../components/containers/Page";
+import { RightSidebar } from "../components/containers/RightSidebar";
 
 export function DashboardPage() {
   return (
@@ -17,13 +15,13 @@ export function DashboardPage() {
       <Sidebar />
 
       <Wrap>
-        <Header title='Главная' />
+        <Header title="Главная" />
 
         <Container>
           <Content></Content>
 
           <RightSidebar>
-            <Panel title='Инструменты' />
+            <Panel title="Инструменты" />
           </RightSidebar>
         </Container>
       </Wrap>

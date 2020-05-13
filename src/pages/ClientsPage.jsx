@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./StuffPage.css";
-
 import { Sidebar } from "../components/sidebar/Sidebar";
 import { Header } from "../components/Header";
 import { Panel } from "../components/Panel";
