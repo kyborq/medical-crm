@@ -1,24 +1,42 @@
-import React from 'react';
+import React from "react";
 
-import './StuffPage.css';
+import "./StuffPage.css";
 
-import { Sidebar } from '../components/sidebar/Sidebar';
-import { Header } from '../components/Header';
-import { Panel } from '../components/Panel';
-import { Wrap } from '../components/containers/Wrap';
-import { Container } from '../components/containers/Container';
-import { Content } from '../components/containers/Content';
-import { Page } from '../components/containers/Page';
-import { RightSidebar } from '../components/containers/RightSidebar';
+import { Sidebar } from "../components/sidebar/Sidebar";
+import { Header } from "../components/Header";
+import { Panel } from "../components/Panel";
+import { Wrap } from "../components/containers/Wrap";
+import { Container } from "../components/containers/Container";
+import { Content } from "../components/containers/Content";
+import { Page } from "../components/containers/Page";
+import { RightSidebar } from "../components/containers/RightSidebar";
 
-import { Table, TableRow, TableHeader } from '../components/Table';
+import { Table, TableRow, TableHeader } from "../components/Table";
 
-import { ClientsForm } from '../components/forms/ClientsForm';
+import { ClientsForm } from "../components/forms/ClientsForm";
 
 const StuffData = [
-  ['Иванов Иван Иванович', '123', '20 ноября 1987', '8(800)555-35-35'],
-  ['John Smith', '123', '20 ноября 1987', '8(800)555-35-35'],
-  ['Иванов Иван Иванович', '123', '20 ноября 1987', '8(800)555-35-35'],
+  {
+    id: 0,
+    fio: "Иванов Иван Иванович",
+    reg: "123",
+    bday: "20 ноября 1987",
+    phone: "8(800)555-35-35",
+  },
+  {
+    id: 1,
+    fio: "John Smith",
+    reg: "123",
+    bday: "20 ноября 1987",
+    phone: "8(800)555-35-35",
+  },
+  {
+    id: 2,
+    fio: "Иванов Иван Иванович",
+    reg: "123",
+    bday: "20 ноября 1987",
+    phone: "8(800)555-35-35",
+  },
 ];
 
 export function ClientsPage() {
@@ -27,20 +45,30 @@ export function ClientsPage() {
       <Sidebar />
 
       <Wrap>
-        <Header title='Клиенты' />
+        <Header title="Клиенты" />
 
         <Container>
           <Content>
             <Table>
-              <TableHeader values={['ФИО', 'Данные о прописке', 'Дата рождения', 'Номер телефона']} />
+              <TableHeader
+                values={[
+                  "ФИО",
+                  "Данные о прописке",
+                  "Дата рождения",
+                  "Номер телефона",
+                ]}
+              />
               {StuffData.map((stuff) => (
-                <TableRow key={stuff[0]} values={[stuff[0], stuff[1], stuff[2], stuff[3]]} />
+                <TableRow
+                  key={stuff.id}
+                  values={[stuff.fio, stuff.reg, stuff.bday, stuff.phone]}
+                />
               ))}
             </Table>
           </Content>
 
           <RightSidebar>
-            <Panel title='Добавить'>
+            <Panel title="Добавить">
               <ClientsForm />
             </Panel>
           </RightSidebar>
