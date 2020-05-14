@@ -9,8 +9,11 @@ export function ServicesForm() {
 
   const isFormValid = (service, cost, duration) => {
     // ...
-    if (service !== "" && cost !== "" && duration !== "") {
+    if (service !== "" && service.trim() === service) {
       // ...
+      return true;
+    } else {
+      return false;
     }
   };
 
@@ -31,7 +34,8 @@ export function ServicesForm() {
         placeholder="Цена"
         value={cost}
         onChange={(e) => {
-          setCost(e.target.value);
+          if (e.target.value === "") e.target.value = "0";
+          setCost(parseInt(e.target.value));
         }}
       />
       <input
@@ -40,21 +44,18 @@ export function ServicesForm() {
         placeholder="Продолжительность"
         value={duration}
         onChange={(e) => {
-          setDuration(e.target.value);
+          if (e.target.value === "") e.target.value = "0";
+          setDuration(parseInt(e.target.value));
         }}
       />
       <button
         className="form-button"
         onClick={() => {
-          console.log(
-            "Сервис: " +
-              service +
-              ", Стоимость: " +
-              cost +
-              ", Продолжительность: " +
-              duration
-          );
-          isFormValid(service, cost, duration);
+          if (isFormValid(service, cost, duration)) {
+            console.log("Добавлено");
+          } else {
+            console.log("Ошибка! Данные не валидны");
+          }
         }}
       >
         Добавить

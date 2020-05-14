@@ -10,8 +10,17 @@ export function ClientsForm() {
 
   const isFormValid = (fio, registration, birthday, phone) => {
     // ...
-    if (fio !== "" && registration !== "" && birthday !== "" && phone !== "") {
-      // ...
+    if (
+      fio !== "" &&
+      registration !== "" &&
+      birthday !== "" &&
+      phone !== "" &&
+      fio === fio.trim() &&
+      registration === registration.trim()
+    ) {
+      return true;
+    } else {
+      return false;
     }
   };
 
@@ -41,6 +50,18 @@ export function ClientsForm() {
         placeholder="Дата рождения"
         value={birthday}
         onChange={(e) => {
+          if (e.target.value.length === 2) {
+            e.target.value += ".";
+          }
+
+          if (e.target.value.length === 5) {
+            e.target.value += ".";
+          }
+
+          if (e.target.value.length > 10) {
+            e.target.value = birthday;
+          }
+
           setBirthday(e.target.value);
         }}
       />
@@ -50,23 +71,33 @@ export function ClientsForm() {
         placeholder="Номер телефона"
         value={phone}
         onChange={(e) => {
+          if (e.target.value.length < 3) {
+            e.target.value = "+7(";
+          }
+
+          if (e.target.value.length === 6) {
+            e.target.value += ")";
+          }
+
+          if (e.target.value.length === 10 || e.target.value.length === 13) {
+            e.target.value += "-";
+          }
+
+          if (e.target.value.length > 16) {
+            e.target.value = phone;
+          }
+
           setPhone(e.target.value);
         }}
       />
       <button
         className="form-button"
         onClick={() => {
-          console.log(
-            "fio: " +
-              fio +
-              ", reg: " +
-              register +
-              ", bday: " +
-              birthday +
-              ", phone: " +
-              phone
-          );
-          isFormValid(fio, register, birthday, phone);
+          if (isFormValid(fio, register, birthday, phone)) {
+            console.log("Добавлено");
+          } else {
+            console.log("Ошибка!");
+          }
         }}
       >
         Добавить

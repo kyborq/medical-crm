@@ -10,8 +10,16 @@ export function StuffForm() {
 
   const isFormValid = (fio, spec, dur) => {
     // ...
-    if (fio !== "" && spec !== "" && dur !== "") {
+    if (
+      fio !== "" &&
+      spec !== "" &&
+      fio.trim() === fio &&
+      spec.trim() === spec
+    ) {
       // ...
+      return true;
+    } else {
+      return false;
     }
   };
 
@@ -41,14 +49,18 @@ export function StuffForm() {
         placeholder="Время приема"
         value={dur}
         onChange={(e) => {
-          setDur(e.target.value);
+          if (e.target.value === "") e.target.value = "0";
+          setDur(parseInt(e.target.value));
         }}
       />
       <button
         className="form-button"
         onClick={() => {
-          console.log("ФИО: " + fio + " Спец.: " + spec + " Время: " + dur);
-          isFormValid(fio, spec, dur);
+          if (isFormValid(fio, spec, dur)) {
+            console.log("Добавлено");
+          } else {
+            console.log("Ошибка");
+          }
         }}
       >
         Добавить

@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import './FormStyle.css';
+import "./FormStyle.css";
 
 const Data = {
-  login: 'user1',
-  password: 'pass123',
+  login: "user1",
+  password: "pass123",
 };
 
 export function LoginForm() {
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
 
   const isFormValid = (login, password) => {
     if (
@@ -52,16 +52,12 @@ export function LoginForm() {
         className="form-button"
         onClick={() => {
           if (isFormValid(login, password)) {
-            location.href = '/dashboard';
+            location.href = "/dashboard";
           }
         }}
       >
         Войти
       </button>
-
-      {!isFormValid(login, password) && (
-        <div className="not-valid">Ошибка входа. Не валидные данные!</div>
-      )}
     </div>
   );
 }
