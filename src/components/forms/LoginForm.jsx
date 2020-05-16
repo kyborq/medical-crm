@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import axios from "axios";
 
-import './FormStyle.css';
+import "./FormStyle.css";
 
 const Data = {
-  login: 'user1',
-  password: 'pass123',
+  login: "user1",
+  password: "pass123",
 };
 
 export function LoginForm() {
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
 
   const isFormValid = (login, password) => {
     if (
@@ -51,9 +52,24 @@ export function LoginForm() {
       <button
         className="form-button"
         onClick={() => {
-          if (isFormValid(login, password)) {
-            location.href = '/dashboard';
-          }
+          axios
+            .post("http://localhost/auth", {
+              login,
+              password,
+            })
+            .then(function (response) {
+              const data = response.data;
+              if (data.message === "ok") {
+                location.href = "/dashboard";
+              }
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+          // if (isFormValid(login, password)) {
+          //   location.href = '/dashboard';
+          // }
         }}
       >
         Войти
