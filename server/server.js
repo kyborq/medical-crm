@@ -1,18 +1,18 @@
 // шаблон сервера
-const express = require("express");
-const bodyParser = require("body-parser");
+const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
-const cors = require("cors");
-// const mysql = require("mysql");
+const cors = require('cors');
+const mysql = require('mysql');
 
-// const connection = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",
-//   password: "root",
-//   database: "medical_crm",
-// });
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'user01',
+  password: '123456',
+  database: 'medical',
+});
 
-// connection.connect();
+connection.connect();
 
 // для того, чтобы можно было обрабатывать req.body
 app.use(bodyParser.text());
@@ -28,20 +28,24 @@ app.use(cors());
 //   res.send("Маршрут для вывод содержимого файла пользователей");
 // });
 
-app.post("/auth", function (req, res) {
-  console.log(req);
+app.post('/auth', function (req, res) {
+  console.log(req.body);
+  let query =
+    'SELECT * FROM users WHERE `login`="' +
+    req.body.login +
+    '" AND `password`="' +
+    req.body.password +
+    '"';
 
-  /*
-  connection.query("SELECT * FROM users WHERE ...", function (error, results, fields) {
+  connection.query(query, function (error, results, fields) {
     if (error) {
-        res.send(JSON.stringify({ message: "Ошибка сервера", error: 1 }));
+      res.send(JSON.stringify({ message: 'пользователь не найден', error: 1 }));
     }
-    res.send(JSON.stringify({ message: "ok" })); // результат из result можно запихнуть в ответ
+    res.send(JSON.stringify({ message: 'ok' })); // результат из result можно запихнуть в ответ
   });
-*/
 });
 
 app.listen(80, (err) => {
-  if (err) return console.log("something bad happened", err);
-  console.log("server is listening 80");
+  if (err) return console.log('something bad happened', err);
+  console.log('server is listening 80');
 });
