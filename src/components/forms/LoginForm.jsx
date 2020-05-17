@@ -1,29 +1,33 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import _ from 'lodash';
 
-import "./FormStyle.css";
+import './FormStyle.css';
 
 const Data = {
-  login: "user1",
-  password: "pass123",
+  login: 'user1',
+  password: 'pass123',
 };
 
 export function LoginForm() {
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
+  const [login, setLogin] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [isSubmit, submit] = useState(false);
 
   const isFormValid = (login, password) => {
-    if (
-      login === Data.login &&
-      password === Data.password &&
-      login.length < 20 &&
-      password.length > 6
-    ) {
+    if (_.isNull(login) && _.isNull(password)) {
       return true;
-    } else {
-      return false;
+    }
+
+    if (!_.isNull(login) && _.isEmpty(login)) {
+      return { message: 'Пароль или логин введен неверно' };
+    }
+
+    if (!_.isNull(password) && _.isEmpty(password)) {
+      return { message: 'Пароль или логин введен неверно' };
     }
   };
 
+  const validation = isFormValid(login, password);
   return (
     <div className="auth-form">
       <h2 className="form-title">Войти в систему</h2>
@@ -48,12 +52,14 @@ export function LoginForm() {
         }}
       />
 
+      {isSubmit && validation && validation.message && (
+        <ErrorMessage text={validation.message} />
+      )}
+
       <button
         className="form-button"
         onClick={() => {
-          if (isFormValid(login, password)) {
-            location.href = "/dashboard";
-          }
+          submit(true);
         }}
       >
         Войти
