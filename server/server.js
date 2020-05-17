@@ -29,6 +29,8 @@ app.use(cors());
 // });
 
 app.post("/auth", function (req, res) {
+  console.log(req);
+
   /*
   connection.query("SELECT * FROM users WHERE ...", function (error, results, fields) {
     if (error) {
