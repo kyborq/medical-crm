@@ -5,7 +5,7 @@ import './NavigationButton.css';
 
 export function NavigationButton({ link, icon, label }) {
   return (
-    <NavLink to={link} className='nav-button' activeClassName='active'>
+    <NavLink exact to={link} className='nav-button' activeClassName='active'>
       <span className='material-icons button-icon'>{icon}</span>
       <span className='button-label'>{label}</span>
     </NavLink>
