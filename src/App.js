@@ -14,7 +14,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/auth">
+        <Route path="/">
           <AuthPage />
         </Route>
 
