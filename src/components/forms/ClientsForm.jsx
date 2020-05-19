@@ -10,16 +10,12 @@ export function ClientsForm() {
   const [register, setRegister] = useState(null);
   const [birthday, setBirthday] = useState(null);
   const [phone, setPhone] = useState(null);
-  const [isSubmit, submit] = useState(false);
+  const [error, setError] = useState(null);
+  // const [isSubmit, submit] = useState(false);
 
   const isFormValid = (fio, registration, birthday, phone) => {
-    if (
-      _.isNull(fio) &&
-      _.isNull(registration) &&
-      _.isNull(birthday) &&
-      _.isNull(phone)
-    ) {
-      return true;
+    if (_.isNull(fio) && _.isNull(registration) && _.isNull(birthday) && _.isNull(phone)) {
+      return { message: 'Заполните все поля' };
     }
 
     if (!_.isNull(fio) && _.isEmpty(fio) && fio.split(' ').length !== 3) {
@@ -41,84 +37,91 @@ export function ClientsForm() {
     return null;
   };
 
-  const validation = isFormValid(fio, register, birthday, phone);
+  // const validation = isFormValid(fio, register, birthday, phone);
   return (
     <div>
-      {isSubmit && validation && validation.message && (
-        <ErrorMessage text={validation.message} />
-      )}
-      <input
-        type="text"
-        className="form-field"
-        placeholder="ФИО"
-        value={fio || ''}
-        onChange={(e) => {
-          setFio(e.target.value);
-        }}
-      />
-      <input
-        type="text"
-        className="form-field"
-        placeholder="Данные о прописке"
-        value={register || ''}
-        onChange={(e) => {
-          setRegister(e.target.value);
-        }}
-      />
-      <input
-        type="text"
-        className="form-field"
-        placeholder="Дата рождения"
-        value={birthday || ''}
-        onChange={(e) => {
-          if (e.target.value.length === 2) {
-            e.target.value += '.';
-          }
-
-          if (e.target.value.length === 5) {
-            e.target.value += '.';
-          }
-
-          if (e.target.value.length > 10) {
-            e.target.value = birthday;
-          }
-
-          setBirthday(e.target.value);
-        }}
-      />
-      <input
-        type="text"
-        className="form-field"
-        placeholder="Номер телефона"
-        value={phone || ''}
-        onChange={(e) => {
-          if (e.target.value.length < 3) {
-            e.target.value = '+7(';
-          }
-
-          if (e.target.value.length === 6) {
-            e.target.value += ')';
-          }
-
-          if (e.target.value.length === 10 || e.target.value.length === 13) {
-            e.target.value += '-';
-          }
-
-          if (e.target.value.length > 16) {
-            e.target.value = phone;
-          }
-
-          setPhone(e.target.value);
-        }}
-      />
-      <button
-        className="form-button"
-        onClick={() => {
-          submit(true);
+      {error && error.message && <ErrorMessage text={error.message} />}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault(); // чтобы не происходил HTTP запрос
+          const err = isFormValid(fio, register, birthday, phone);
+          console.log(err);
+          setError(err ? err : null);
         }}
       >
-        Добавить
-      </button>
+        <input
+          type="text"
+          className="form-field"
+          placeholder="ФИО"
+          value={fio || ''}
+          onChange={(e) => {
+            setFio(e.target.value);
+          }}
+        />
+        <input
+          type="text"
+          className="form-field"
+          placeholder="Данные о прописке"
+          value={register || ''}
+          onChange={(e) => {
+            setRegister(e.target.value);
+          }}
+        />
+        <input
+          type="text"
+          className="form-field"
+          placeholder="Дата рождения"
+          value={birthday || ''}
+          onChange={(e) => {
+            if (e.target.value.length === 2) {
+              e.target.value += '.';
+            }
+
+            if (e.target.value.length === 5) {
+              e.target.value += '.';
+            }
+
+            if (e.target.value.length > 10) {
+              e.target.value = birthday;
+            }
+
+            setBirthday(e.target.value);
+          }}
+        />
+        <input
+          type="text"
+          className="form-field"
+          placeholder="Номер телефона"
+          value={phone || ''}
+          onChange={(e) => {
+            if (e.target.value.length < 3) {
+              e.target.value = '+7(';
+            }
+
+            if (e.target.value.length === 6) {
+              e.target.value += ')';
+            }
+
+            if (e.target.value.length === 10 || e.target.value.length === 13) {
+              e.target.value += '-';
+            }
+
+            if (e.target.value.length > 16) {
+              e.target.value = phone;
+            }
+
+            setPhone(e.target.value);
+          }}
+        />
+        <button
+          className="form-button"
+          onClick={() => {
+            // submit(true);
+          }}
+        >
+          Добавить
+        </button>
+      </form>
     </div>
   );
 }

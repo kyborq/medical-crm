@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
+import { ErrorMessage } from '../ErrorMessage';
 
 import './FormStyle.css';
 
@@ -30,9 +31,7 @@ export function ServicesForm() {
   const validation = isFormValid(service, cost, duration);
   return (
     <div>
-      {isSubmit && validation && validation.message && (
-        <ErrorMessage text={validation.message} />
-      )}
+      {isSubmit && validation && validation.message && <ErrorMessage text={validation.message} />}
       <input
         type="text"
         className="form-field"

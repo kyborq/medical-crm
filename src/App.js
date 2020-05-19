@@ -1,40 +1,40 @@
-import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import { DashboardPage } from "./pages/DashboardPage";
-import { AuthPage } from "./pages/AuthPage";
-import { ErrorPage } from "./pages/ErrorPage";
-import { StuffPage } from "./pages/StuffPage";
-import { ServicesPage } from "./pages/ServicesPage";
-import { ClientsPage } from "./pages/ClientsPage";
+import { DashboardPage } from './pages/DashboardPage';
+import { AuthPage } from './pages/AuthPage';
+import { ErrorPage } from './pages/ErrorPage';
+import { StuffPage } from './pages/StuffPage';
+import { ServicesPage } from './pages/ServicesPage';
+import { ClientsPage } from './pages/ClientsPage';
 
-import "./App.css";
+import './App.css';
 
 export default function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/">
+        <Route exact path="/">
           <AuthPage />
         </Route>
 
-        <Route path="/dashboard">
+        <Route exact path="/dashboard">
           <DashboardPage />
         </Route>
 
-        <Route path="/stuff">
+        <Route exact path="/stuff">
           <StuffPage />
         </Route>
 
-        <Route path="/services">
+        <Route exact path="/services">
           <ServicesPage />
         </Route>
 
-        <Route path="/clients">
+        <Route exact path="/clients">
           <ClientsPage />
         </Route>
 
-        <Route>
+        <Route exact path="*">
           <ErrorPage error="404" message="Not found" />
         </Route>
       </Switch>
