@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ErrorMessage } from '../ErrorMessage';
 import _ from 'lodash';
+import axios from 'axios';
 
 import './FormStyle.css';
 
@@ -42,29 +43,49 @@ export function LoginForm() {
           setError(err ? err : null);
         }}
       >
-        <span className="field-label">Логин:</span>
-        <input
-          type="text"
-          className="form-field"
-          placeholder="Имя пользователя"
-          onChange={(e) => {
-            setLogin(e.target.value);
-          }}
-        />
+          
+      <span className="field-label">Логин:</span>
+      <input
+        type="text"
+        className="form-field"
+        placeholder="Имя пользователя"
+        onInput={(e) => {
+          setLogin(e.target.value);
+        }}
+      />
 
-        <span className="field-label">Пароль:</span>
-        <input
-          type="password"
-          className="form-field"
-          placeholder="Пароль"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
+      <span className="field-label">Пароль:</span>
+      <input
+        type="password"
+        className="form-field"
+        placeholder="Пароль"
+        onInput={(e) => {
+          setPassword(e.target.value);
+        }}
+      />
 
+      <button
+        className="form-button"
+        onClick={() => {
+          axios
+            .post('http://localhost/auth', {
+              login,
+              password,
+            })
+            .then(function (response) {
+              const data = response.data;
+              if (data.message === 'ok') {
+                location.href = '/dashboard';
+              }
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }}
+      >
+   
         {error && error.message && <ErrorMessage text={error.message} />}
-
-        <button className="form-button">Войти</button>
       </form>
     </div>
   );
