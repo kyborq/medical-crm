@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { ErrorMessage } from "../ErrorMessage";
-import axios from "axios";
+import React, { useState } from 'react';
+import { ErrorMessage } from '../ErrorMessage';
+import axios from 'axios';
 
-import "./FormStyle.css";
+import './FormStyle.css';
 
 const Data = {
-  login: "user1",
-  password: "pass123",
+  login: 'user1',
+  password: 'pass123',
 };
 
 export function LoginForm() {
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
 
   const isFormValid = (login, password) => {
     if (
@@ -54,31 +54,24 @@ export function LoginForm() {
         className="form-button"
         onClick={() => {
           axios
-            .post("http://localhost/auth", {
+            .post('http://localhost/auth', {
               login,
               password,
             })
             .then(function (response) {
               const data = response.data;
-              if (data.message === "ok") {
-                location.href = "/dashboard";
+              if (data.message === 'ok') {
+                location.href = '/dashboard';
               }
               console.log(response);
             })
             .catch(function (error) {
               console.log(error);
             });
-          // if (isFormValid(login, password)) {
-          //   location.href = '/dashboard';
-          // }
         }}
       >
         Войти
       </button>
-
-      {!isFormValid(login, password) && (
-        <div className="not-valid">Ошибка входа. Не валидные данные!</div>
-      )}
     </div>
   );
 }

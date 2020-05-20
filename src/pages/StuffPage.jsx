@@ -1,23 +1,21 @@
-import React from 'react';
+import React from "react";
 
-import './StuffPage.css';
+import { Sidebar } from "../components/sidebar/Sidebar";
+import { Header } from "../components/Header";
+import { Panel } from "../components/Panel";
+import { Wrap } from "../components/containers/Wrap";
+import { Container } from "../components/containers/Container";
+import { Content } from "../components/containers/Content";
+import { Page } from "../components/containers/Page";
+import { RightSidebar } from "../components/containers/RightSidebar";
 
-import { Sidebar } from '../components/sidebar/Sidebar';
-import { Header } from '../components/Header';
-import { Panel } from '../components/Panel';
-import { Wrap } from '../components/containers/Wrap';
-import { Container } from '../components/containers/Container';
-import { Content } from '../components/containers/Content';
-import { Page } from '../components/containers/Page';
-import { RightSidebar } from '../components/containers/RightSidebar';
+import { Table, TableRow, TableHeader } from "../components/Table";
 
-import { Table, TableRow, TableHeader } from '../components/Table';
-
-import { StuffForm } from '../components/forms/StuffForm';
+import { StuffForm } from "../components/forms/StuffForm";
 
 const StuffData = [
-  ['Иванов Иван Иванович', 'Врач', '20 минут'],
-  ['John Smith', 'Педиатр', '5 минут'],
+  { id: 0, fio: "Иванов Иван Иванович", spec: "Врач", dur: "20 минут" },
+  { id: 1, fio: "John Smith", spec: "Педиатр", dur: "5 минут" },
 ];
 
 export function StuffPage() {
@@ -26,20 +24,23 @@ export function StuffPage() {
       <Sidebar />
 
       <Wrap>
-        <Header title='Персонал' />
+        <Header title="Персонал" />
 
         <Container>
           <Content>
             <Table>
-              <TableHeader values={['ФИО', 'Специализация', 'Время приема']} />
+              <TableHeader values={["ФИО", "Специализация", "Время приема"]} />
               {StuffData.map((stuff) => (
-                <TableRow key={stuff[0]} values={[stuff[0], stuff[1], stuff[2]]} />
+                <TableRow
+                  key={stuff.id}
+                  values={[stuff.fio, stuff.spec, stuff.dur]}
+                />
               ))}
             </Table>
           </Content>
 
           <RightSidebar>
-            <Panel title='Добавить'>
+            <Panel title="Добавить">
               <StuffForm />
             </Panel>
           </RightSidebar>
