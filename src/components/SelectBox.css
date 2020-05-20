@@ -1,0 +1,15 @@
+.select-box {
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #e1e7ed;
+  border-radius: 16px;
+  margin-bottom: 8px;
+  transition: 250ms border-color;
+}
+
+.select-box:focus {
+  border-color: #2ba9e6;
+  transition: 250ms border-color;
+}
