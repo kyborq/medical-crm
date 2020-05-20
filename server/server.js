@@ -30,18 +30,49 @@ app.use(cors());
 
 app.post('/auth', function (req, res) {
   console.log(req.body);
-  let query =
-    'SELECT * FROM users WHERE `login`="' +
-    req.body.login +
-    '" AND `password`="' +
-    req.body.password +
-    '"';
+  let query = 'SELECT * FROM users WHERE `login`="' + req.body.login + '" AND `password`="' + req.body.password + '"';
 
   connection.query(query, function (error, results, fields) {
     if (error) {
       res.send(JSON.stringify({ message: 'пользователь не найден', error: 1 }));
     }
     res.send(JSON.stringify({ message: 'ok' })); // результат из result можно запихнуть в ответ
+  });
+});
+
+app.get('/stuff', function (req, res) {
+  console.log(req.body);
+  let query = 'SELECT * FROM stuff';
+
+  connection.query(query, function (error, result, fields) {
+    if (error) {
+      res.send(JSON.stringify({ message: 'неожиданная ошибка', error: 1 }));
+    }
+    res.send(JSON.stringify({ message: 'ok', content: result })); // результат из result можно запихнуть в ответ
+  });
+});
+
+app.get('/clients', function (req, res) {
+  console.log(req.body);
+  let query = 'SELECT * FROM clients';
+
+  connection.query(query, function (error, result, fields) {
+    if (error) {
+      res.send(JSON.stringify({ message: 'неожиданная ошибка', error: 1 }));
+    }
+    res.send(JSON.stringify({ message: 'ok', content: result })); // результат из result можно запихнуть в ответ
+  });
+});
+
+app.get('/services', function (req, res) {
+  console.log(req.body);
+  let query = 'SELECT * FROM services';
+
+  connection.query(query, function (error, result, fields) {
+    if (error) {
+      res.send(JSON.stringify({ message: 'неожиданная ошибка', error: 1 }));
+    }
+    res.send(JSON.stringify({ message: 'ok', content: result })); // результат из result можно запихнуть в ответ
   });
 });
 

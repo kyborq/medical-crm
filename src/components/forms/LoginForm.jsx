@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { ErrorMessage } from '../ErrorMessage';
 import axios from 'axios';
 
 import './FormStyle.css';
@@ -14,12 +13,7 @@ export function LoginForm() {
   const [password, setPassword] = useState('');
 
   const isFormValid = (login, password) => {
-    if (
-      login === Data.login &&
-      password === Data.password &&
-      login.length < 20 &&
-      password.length > 6
-    ) {
+    if (login === Data.login && password === Data.password && login.length < 20 && password.length > 6) {
       return true;
     } else {
       return false;
