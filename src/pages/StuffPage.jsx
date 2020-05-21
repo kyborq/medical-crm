@@ -14,13 +14,8 @@ import { Table, TableRow, TableHeader } from '../components/Table';
 
 import { StuffForm } from '../components/forms/StuffForm';
 
-const StuffData = [
-  { id: 0, fio: 'Иванов Иван Иванович', spec: 'Врач', dur: '20 минут' },
-  { id: 1, fio: 'John Smith', spec: 'Педиатр', dur: '5 минут' },
-];
-
 export function StuffPage() {
-  const [stuffData, setStuffData] = useState([]);
+  const [stuffList, setStuffList] = useState([]);
 
   useEffect(() => {
     console.log('Stuff page loaded');
@@ -48,7 +43,7 @@ export function StuffPage() {
           <Content>
             <Table>
               <TableHeader values={['ФИО', 'Специализация', 'Время приема']} />
-              {StuffData.map((stuff) => (
+              {stuffList.map((stuff) => (
                 <TableRow key={stuff.id} values={[stuff.fio, stuff.spec, stuff.dur]} />
               ))}
             </Table>

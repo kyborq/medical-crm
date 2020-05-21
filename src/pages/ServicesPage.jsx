@@ -14,22 +14,9 @@ import { Table, TableRow, TableHeader } from '../components/Table';
 
 import { ServicesForm } from '../components/forms/ServicesForm';
 
-const ServicesData = [
-  {
-    id: 0,
-    service: 'Удаление зуба',
-    cost: '1300р',
-    dur: '30 минут',
-  },
-  {
-    id: 1,
-    service: 'Профилактический осмотр',
-    cost: '500р',
-    dur: '5 минут',
-  },
-];
-
 export function ServicesPage() {
+  const [servicesList, setServicesList] = useState([]);
+
   useEffect(() => {
     console.log('Services page loaded');
     axios
@@ -56,7 +43,7 @@ export function ServicesPage() {
           <Content>
             <Table>
               <TableHeader values={['Название услуги', 'Цена', 'Продолжительность (мин)']} />
-              {ServicesData.map((service) => (
+              {servicesList.map((service) => (
                 <TableRow key={service.id} values={[service.service, service.cost, service.dur]} />
               ))}
             </Table>
