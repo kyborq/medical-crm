@@ -7,8 +7,8 @@ import { Navigation } from './Navigation';
 
 export function Sidebar() {
   return (
-    <div className='sidebar'>
-      <div className='sidebar-container'>
+    <div className="sidebar">
+      <div className="sidebar-container">
         <Logo />
         <Navigation />
       </div>

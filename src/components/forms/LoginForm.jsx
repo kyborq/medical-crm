@@ -74,9 +74,10 @@ export function LoginForm() {
               .then(function (response) {
                 const data = response.data;
                 if (data.message === 'ok') {
+                  sessionStorage.setItem('login', data.content[0].id);
                   location.href = '/dashboard';
                 }
-                console.log(response);
+                console.log(data);
               })
               .catch(function (error) {
                 console.log(error);
