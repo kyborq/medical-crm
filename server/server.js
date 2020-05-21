@@ -30,18 +30,13 @@ app.use(cors());
 
 app.post('/auth', function (req, res) {
   console.log(req.body);
-  let query =
-    'SELECT * FROM users WHERE `login`="' +
-    req.body.login +
-    '" AND `password`="' +
-    req.body.password +
-    '"';
+  let query = 'SELECT * FROM users WHERE `login`="' + req.body.login + '" AND `password`="' + req.body.password + '"';
 
   connection.query(query, function (error, results, fields) {
     if (error) {
       res.send(JSON.stringify({ message: 'пользователь не найден', error: 1 }));
     }
-    res.send(JSON.stringify({ message: 'ok' })); // результат из result можно запихнуть в ответ
+    res.send(JSON.stringify({ message: 'ok', content: results })); // результат из result можно запихнуть в ответ
   });
 });
 
