@@ -21,16 +21,9 @@ app.use(bodyParser.json());
 // разрешаем CORS запросы на стороне сервера
 app.use(cors());
 
-// app.get("/users", function (req, res) {
-//   /*
-//     На данном маршруте нужно вывести содержимое файла users.dat
-//   */
-//   res.send("Маршрут для вывод содержимого файла пользователей");
-// });
-
 app.post('/auth', function (req, res) {
   console.log(req.body);
-  let query = 'SELECT * FROM users WHERE `login`="' + req.body.login + '" AND `password`="' + req.body.password + '"';
+  const query = 'SELECT * FROM users WHERE `login`="' + req.body.login + '" AND `password`="' + req.body.password + '"';
 
   connection.query(query, function (error, results, fields) {
     if (error) {
@@ -42,7 +35,7 @@ app.post('/auth', function (req, res) {
 
 app.get('/stuff', function (req, res) {
   console.log(req.body);
-  let query = 'SELECT * FROM stuff';
+  const query = 'SELECT * FROM stuff WHERE `clinic_id`=1';
 
   connection.query(query, function (error, result, fields) {
     if (error) {
@@ -54,7 +47,7 @@ app.get('/stuff', function (req, res) {
 
 app.get('/clients', function (req, res) {
   console.log(req.body);
-  let query = 'SELECT * FROM clients';
+  const query = 'SELECT * FROM clients WHERE `clinic_id`=1';
 
   connection.query(query, function (error, result, fields) {
     if (error) {
@@ -66,7 +59,7 @@ app.get('/clients', function (req, res) {
 
 app.get('/services', function (req, res) {
   console.log(req.body);
-  let query = 'SELECT * FROM services';
+  const query = 'SELECT * FROM services WHERE `clinic_id`=1';
 
   connection.query(query, function (error, result, fields) {
     if (error) {

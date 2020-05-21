@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import { Sidebar } from '../components/sidebar/Sidebar';
@@ -20,6 +20,8 @@ const StuffData = [
 ];
 
 export function StuffPage() {
+  const [stuffData, setStuffData] = useState([]);
+
   useEffect(() => {
     console.log('Stuff page loaded');
     axios
@@ -27,7 +29,7 @@ export function StuffPage() {
       .then(function (response) {
         const data = response.data;
         if (data.message === 'ok') {
-          console.log(data);
+          // ... TODO
         }
       })
       .catch(function (error) {
