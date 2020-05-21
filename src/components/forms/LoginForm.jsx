@@ -43,48 +43,49 @@ export function LoginForm() {
           setError(err ? err : null);
         }}
       >
-          
-      <span className="field-label">Логин:</span>
-      <input
-        type="text"
-        className="form-field"
-        placeholder="Имя пользователя"
-        onInput={(e) => {
-          setLogin(e.target.value);
-        }}
-      />
+        <span className="field-label">Логин:</span>
+        <input
+          type="text"
+          className="form-field"
+          placeholder="Имя пользователя"
+          onInput={(e) => {
+            setLogin(e.target.value);
+          }}
+        />
 
-      <span className="field-label">Пароль:</span>
-      <input
-        type="password"
-        className="form-field"
-        placeholder="Пароль"
-        onInput={(e) => {
-          setPassword(e.target.value);
-        }}
-      />
+        <span className="field-label">Пароль:</span>
+        <input
+          type="password"
+          className="form-field"
+          placeholder="Пароль"
+          onInput={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
 
-      <button
-        className="form-button"
-        onClick={() => {
-          axios
-            .post('http://localhost/auth', {
-              login,
-              password,
-            })
-            .then(function (response) {
-              const data = response.data;
-              if (data.message === 'ok') {
-                location.href = '/dashboard';
-              }
-              console.log(response);
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-        }}
-      >
-   
+        <button
+          className="form-button"
+          onClick={() => {
+            axios
+              .post('http://localhost/auth', {
+                login,
+                password,
+              })
+              .then(function (response) {
+                const data = response.data;
+                if (data.message === 'ok') {
+                  location.href = '/dashboard';
+                }
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          }}
+        >
+          Войти
+        </button>
+
         {error && error.message && <ErrorMessage text={error.message} />}
       </form>
     </div>
