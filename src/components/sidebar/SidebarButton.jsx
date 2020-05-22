@@ -1,11 +1,13 @@
 import React from 'react';
 
+const classnames = require('classnames');
+
 import './SidebarButton.css';
 
 export function SidebarButton({ icon, label, theme, handleClick }) {
   return (
     <button
-      className={'side-button ' + theme}
+      className={classnames('side-button', theme)}
       onClick={() => {
         handleClick();
       }}

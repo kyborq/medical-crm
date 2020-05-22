@@ -28,15 +28,22 @@ app.use(cors());
 //   res.send("Маршрут для вывод содержимого файла пользователей");
 // });
 
+connection.query('SET SESSION wait_timeout = 604800'); // Seven days connection timeout
+
 app.post('/auth', function (req, res) {
   console.log(req.body);
   let query = 'SELECT * FROM users WHERE `login`="' + req.body.login + '" AND `password`="' + req.body.password + '"';
 
   connection.query(query, function (error, results, fields) {
     if (error) {
+      res.send(JSON.stringify({ message: 'ошибка выполнения запроса', error: 0 }));
+    }
+
+    if (results.length !== 0) {
+      res.send(JSON.stringify({ message: 'ok', user_id: results[0].id })); // результат из result можно запихнуть в ответ
+    } else {
       res.send(JSON.stringify({ message: 'пользователь не найден', error: 1 }));
     }
-    res.send(JSON.stringify({ message: 'ok', content: results })); // результат из result можно запихнуть в ответ
   });
 });
 
