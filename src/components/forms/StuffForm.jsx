@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
 import { ErrorMessage } from '../ErrorMessage';
+import axios from 'axios';
 
 import { SelectBox } from '../SelectBox';
 
@@ -84,7 +85,35 @@ export function StuffForm() {
             setDur(parseInt(e.target.value));
           }}
         />
-        <button className="form-button">Добавить</button>
+        <button
+          className="form-button"
+          onClick={() => {
+            if (_.isNull(error)) {
+              axios
+                .post('http://localhost/stuff', {
+                  fio,
+                  spec,
+                  dur,
+                })
+                .then(function (response) {
+                  const data = response.data;
+                  if (data.message === 'ok') {
+                    console.log(data);
+                    setFio(null);
+                    setSpec(null);
+                    setDur(null);
+                  } else {
+                    setError({ message: 'запрос не выполнен' });
+                  }
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+            }
+          }}
+        >
+          Добавить
+        </button>
       </form>
     </div>
   );
