@@ -24,7 +24,7 @@ app.use(cors());
 // запрос на страницу входа, форма входа /auth
 app.post('/auth', function (req, res) {
   console.log(req.body);
-
+  
   const query = 'SELECT * FROM users WHERE `login`="' + req.body.login + '" AND `password`="' + req.body.password + '"';
 
   connection.query(query, function (error, results, fields) {
@@ -68,6 +68,42 @@ app.post('/stuff', function (req, res) {
       res.send(JSON.stringify({ message: 'непредвиденная ошибка', error: 1 }));
     }
     res.send(JSON.stringify({ message: 'ok' })); // результат из result можно запихнуть в ответ
+  });
+});
+
+app.get('/stuff', function (req, res) {
+  console.log(req.body);
+  const query = 'SELECT * FROM stuff WHERE `clinic_id`=1';
+
+  connection.query(query, function (error, result, fields) {
+    if (error) {
+      res.send(JSON.stringify({ message: 'неожиданная ошибка', error: 1 }));
+    }
+    res.send(JSON.stringify({ message: 'ok', content: result })); // результат из result можно запихнуть в ответ
+  });
+});
+
+app.get('/clients', function (req, res) {
+  console.log(req.body);
+  const query = 'SELECT * FROM clients WHERE `clinic_id`=1';
+
+  connection.query(query, function (error, result, fields) {
+    if (error) {
+      res.send(JSON.stringify({ message: 'неожиданная ошибка', error: 1 }));
+    }
+    res.send(JSON.stringify({ message: 'ok', content: result })); // результат из result можно запихнуть в ответ
+  });
+});
+
+app.get('/services', function (req, res) {
+  console.log(req.body);
+  const query = 'SELECT * FROM services WHERE `clinic_id`=1';
+
+  connection.query(query, function (error, result, fields) {
+    if (error) {
+      res.send(JSON.stringify({ message: 'неожиданная ошибка', error: 1 }));
+    }
+    res.send(JSON.stringify({ message: 'ok', content: result })); // результат из result можно запихнуть в ответ
   });
 });
 
