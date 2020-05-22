@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import { Sidebar } from '../components/sidebar/Sidebar';
 import { Header } from '../components/Header';
@@ -13,12 +14,24 @@ import { Table, TableRow, TableHeader } from '../components/Table';
 
 import { StuffForm } from '../components/forms/StuffForm';
 
-const StuffData = [
-  { id: 0, fio: 'Иванов Иван Иванович', spec: 'Врач', dur: '20 минут' },
-  { id: 1, fio: 'John Smith', spec: 'Педиатр', dur: '5 минут' },
-];
-
 export function StuffPage() {
+  const [stuffList, setStuffList] = useState([]);
+
+  useEffect(() => {
+    console.log('Stuff page loaded');
+    axios
+      .get('http://localhost/stuff')
+      .then(function (response) {
+        const data = response.data;
+        if (data.message === 'ok') {
+          // ... TODO
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
+
   return (
     <Page>
       <Sidebar />
@@ -30,7 +43,7 @@ export function StuffPage() {
           <Content>
             <Table>
               <TableHeader values={['ФИО', 'Специализация', 'Время приема']} />
-              {StuffData.map((stuff) => (
+              {stuffList.map((stuff) => (
                 <TableRow key={stuff.id} values={[stuff.fio, stuff.spec, stuff.dur]} />
               ))}
             </Table>
