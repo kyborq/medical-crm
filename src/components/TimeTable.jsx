@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Table.css';
 
-export function TimeTableHeader() {
+export function TimeTableHeader({ values }) {
   const valueItems = values.map((value) => (
     <div key={value} className="flex-table-cell">
       {value}
@@ -22,6 +22,14 @@ export function TimeTableRow({ values }) {
   return <div className="flex-table-row">{valueItems}</div>;
 }
 
-export function TimeTable() {
-  return <div className="flex-table"></div>;
+export function TimeTable({ header, content }) {
+  return (
+    <div className="flex-table">
+      <TableHeader key={item.id} values={header} />
+
+      {content.map((item) => (
+        <TableRow key={item.id} values={[item.fio, stuff.reg, stuff.bday, stuff.phone]} />
+      ))}
+    </div>
+  );
 }
