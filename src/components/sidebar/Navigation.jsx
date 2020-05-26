@@ -10,8 +10,9 @@ export function Navigation() {
       <NavigationButton link="/dashboard" icon="dashboard" label="Главная" />
       <NavigationButton link="/stuff" icon="person" label="Персонал" />
       <NavigationButton link="/clients" icon="people" label="Клиенты" />
-      <NavigationButton link="/services" icon="assignment" label="Услуги" />
-      <NavigationButton link="/records" icon="schedule" label="Заявки" />
+      <NavigationButton link="/services" icon="list" label="Услуги" />
+      <NavigationButton link="/records" icon="assignment" label="Заявки" />
+      <NavigationButton link="/schedule" icon="schedule" label="Расписание" />
     </div>
   );
 }

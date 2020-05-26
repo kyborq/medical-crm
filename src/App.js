@@ -8,6 +8,7 @@ import { StuffPage } from './pages/StuffPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { ClientsPage } from './pages/ClientsPage';
 import { RecordsPage } from './pages/RecordsPage';
+import { SchedulePage } from './pages/SchedulePage';
 
 import './App.css';
 
@@ -37,6 +38,10 @@ export default function App() {
 
         <Route exact path="/records">
           <RecordsPage />
+        </Route>
+
+        <Route exact path="/schedule">
+          <SchedulePage />
         </Route>
 
         <Route exact path="*">
