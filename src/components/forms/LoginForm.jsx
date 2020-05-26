@@ -70,15 +70,14 @@ export function LoginForm() {
               })
               .then(function (response) {
                 const data = response.data;
-                if (data.message === 'ok') {
+              
+                if (data.message === 'ok' && data.content.length > 0) {
                   sessionStorage.setItem('login', data.user_id);
                   location.href = '/dashboard';
+                } else {
+                  console.log('ошибка входа');
+                  setError({ message: 'пользователь не найден' });
                 }
-
-                if (data.error) {
-                  setError(data);
-                }
-                console.log(data);
               })
               .catch(function (error) {
                 console.log(error);

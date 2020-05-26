@@ -7,6 +7,7 @@ import { ErrorPage } from './pages/ErrorPage';
 import { StuffPage } from './pages/StuffPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { ClientsPage } from './pages/ClientsPage';
+import { RecordsPage } from './pages/RecordsPage';
 
 import './App.css';
 
@@ -32,6 +33,10 @@ export default function App() {
 
         <Route exact path="/clients">
           <ClientsPage />
+        </Route>
+
+        <Route exact path="/records">
+          <RecordsPage />
         </Route>
 
         <Route exact path="*">

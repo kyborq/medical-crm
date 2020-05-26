@@ -21,18 +21,11 @@ app.use(bodyParser.json());
 // разрешаем CORS запросы на стороне сервера
 app.use(cors());
 
-// app.get("/users", function (req, res) {
-//   /*
-//     На данном маршруте нужно вывести содержимое файла users.dat
-//   */
-//   res.send("Маршрут для вывод содержимого файла пользователей");
-// });
-
 connection.query('SET SESSION wait_timeout = 604800'); // Seven days connection timeout
 
+// ------------------------------ POST 
 app.post('/auth', function (req, res) {
-  console.log(req.body);
-  let query = 'SELECT * FROM users WHERE `login`="' + req.body.login + '" AND `password`="' + req.body.password + '"';
+  const query = 'SELECT * FROM users WHERE `login`="' + req.body.login + '" AND `password`="' + req.body.password + '"';
 
   connection.query(query, function (error, results, fields) {
     if (error) {
@@ -44,6 +37,73 @@ app.post('/auth', function (req, res) {
     } else {
       res.send(JSON.stringify({ message: 'пользователь не найден', error: 1 }));
     }
+  });
+});
+
+app.post('/services', function (req, res) {
+  const query = 'INSERT INTO `services`(`clinic_id`, `name`, `cost`, `duration`) VALUES (1,"' + req.body.service + '",' + req.body.cost + ',' + req.body.duration + ')';
+
+  connection.query(query, function (error, results, fields) {
+    if (error) {
+      res.send(JSON.stringify({ message: 'непредвиденная ошибка', error: 1 }));
+    }
+    res.send(JSON.stringify({ message: 'ok' })); // результат из result можно запихнуть в ответ
+  });
+});
+
+app.post('/clients', function (req, res) {
+  const query = 'INSERT INTO `clients`(`clinic_id`, `fio`, `registration`, `bday`, `phone`) VALUES (1,' + req.body.fio + ',' + req.body.register + ',' + req.body.birthday + ',' + req.body.phone + ')';
+
+  connection.query(query, function (error, results, fields) {
+    if (error) {
+      res.send(JSON.stringify({ message: 'непредвиденная ошибка', error: 1 }));
+    }
+    res.send(JSON.stringify({ message: 'ok' })); // результат из result можно запихнуть в ответ
+  });
+});
+
+app.post('/stuff', function (req, res) {
+  const query = 'INSERT INTO `stuff`(`clinic_id`, `fio`, `spec`, `time`) VALUES (1,"' + req.body.fio + '","' + req.body.spec + '",' + req.body.dur + ')';
+
+  connection.query(query, function (error, results, fields) {
+    if (error) {
+      res.send(JSON.stringify({ message: 'непредвиденная ошибка', error: 1 }));
+    }
+    res.send(JSON.stringify({ message: 'ok' })); // результат из result можно запихнуть в ответ
+  });
+});
+
+// ------------------------------ GET 
+app.get('/stuff', function (req, res) {
+  const query = 'SELECT * FROM stuff WHERE `clinic_id`=1';
+
+  connection.query(query, function (error, result, fields) {
+    if (error) {
+      res.send(JSON.stringify({ message: 'неожиданная ошибка', error: 1 }));
+    }
+    res.send(JSON.stringify({ message: 'ok', content: result })); // результат из result можно запихнуть в ответ
+  });
+});
+
+app.get('/clients', function (req, res) {
+  const query = 'SELECT * FROM clients WHERE `clinic_id`=1';
+
+  connection.query(query, function (error, result, fields) {
+    if (error) {
+      res.send(JSON.stringify({ message: 'неожиданная ошибка', error: 1 }));
+    }
+    res.send(JSON.stringify({ message: 'ok', content: result })); // результат из result можно запихнуть в ответ
+  });
+});
+
+app.get('/services', function (req, res) {
+  const query = 'SELECT * FROM services WHERE `clinic_id`=1';
+
+  connection.query(query, function (error, result, fields) {
+    if (error) {
+      res.send(JSON.stringify({ message: 'неожиданная ошибка', error: 1 }));
+    }
+    res.send(JSON.stringify({ message: 'ok', content: result })); // результат из result можно запихнуть в ответ
   });
 });
 

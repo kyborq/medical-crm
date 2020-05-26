@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import { Sidebar } from '../components/sidebar/Sidebar';
 import { Header } from '../components/Header';
@@ -13,34 +14,24 @@ import { Table, TableRow, TableHeader } from '../components/Table';
 
 import { ClientsForm } from '../components/forms/ClientsForm';
 
-const StuffData = [
-  {
-    id: 0,
-    fio: 'Иванов Иван Иванович',
-    reg: '123',
-    bday: '20 ноября 1987',
-    phone: '8(800)555-35-35',
-  },
-  {
-    id: 1,
-    fio: 'John Smith',
-    reg: '123',
-    bday: '20 ноября 1987',
-    phone: '8(800)555-35-35',
-  },
-  {
-    id: 2,
-    fio: 'Иванов Иван Иванович',
-    reg: '123',
-    bday: '20 ноября 1987',
-    phone: '8(800)555-35-35',
-  },
-];
-
 export function ClientsPage() {
+  const [stuffList, setStuffList] = useState([]);
+
   useEffect(() => {
     if (!sessionStorage.getItem('login')) {
       location.href = '/';
+    } else {
+      axios
+        .get('http://localhost/clients')
+        .then(function (response) {
+          const data = response.data;
+          if (data.message === 'ok') {
+            console.log(data);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   });
 
@@ -55,7 +46,7 @@ export function ClientsPage() {
           <Content>
             <Table>
               <TableHeader values={['ФИО', 'Данные о прописке', 'Дата рождения', 'Номер телефона']} />
-              {StuffData.map((stuff) => (
+              {stuffList.map((stuff) => (
                 <TableRow key={stuff.id} values={[stuff.fio, stuff.reg, stuff.bday, stuff.phone]} />
               ))}
             </Table>

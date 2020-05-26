@@ -106,7 +106,37 @@ export function ClientsForm() {
             setPhone(e.target.value);
           }}
         />
-        <button className="form-button">Добавить</button>
+        <button
+          className="form-button"
+          onClick={() => {
+            if (_.isNull(error)) {
+              axios
+                .post('http://localhost/clients', {
+                  fio,
+                  register,
+                  birthday,
+                  phone,
+                })
+                .then(function (response) {
+                  const data = response.data;
+                  if (data.message === 'ok') {
+                    console.log(data);
+                    setFio(null);
+                    setRegister(null);
+                    setBirthday(null);
+                    setPhone(null);
+                  } else {
+                    setError({ message: 'запрос не выполнен' });
+                  }
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+            }
+          }}
+        >
+          Добавить
+        </button>
       </form>
     </div>
   );
