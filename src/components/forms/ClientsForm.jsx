@@ -11,14 +11,13 @@ export function ClientsForm() {
   const [birthday, setBirthday] = useState(null);
   const [phone, setPhone] = useState(null);
   const [error, setError] = useState(null);
-  // const [isSubmit, submit] = useState(false);
 
   const isFormValid = (fio, registration, birthday, phone) => {
-    if (_.isNull(fio) && _.isNull(registration) && _.isNull(birthday) && _.isNull(phone)) {
+    if (_.isNull(fio) || _.isNull(registration) || _.isNull(birthday) || _.isNull(phone)) {
       return { message: 'Заполните все поля' };
     }
 
-    if (!_.isNull(fio) && _.isEmpty(fio) && fio.split(' ').length !== 3) {
+    if ((!_.isNull(fio) && _.isEmpty(fio)) || (!_.isNull(fio) && fio.split(' ').length !== 3)) {
       return { message: 'Ф.И.О введен неверно' };
     }
 
@@ -26,8 +25,8 @@ export function ClientsForm() {
       return { message: 'Данные о регистрации введены неверно' };
     }
 
-    if (!_.isNull(birthday) && birthday.split('.').length !== 3) {
-      return { message: 'Дата рождения введена неверно' };
+    if (!_.isNull(birthday) && birthday.split('-').length !== 3) {
+      return { message: 'Дата рождения введена неверно', currentValue: birthday.split('-').length !== 3 };
     }
 
     if (!_.isNull(phone) && _.isEmpty(phone)) {
@@ -37,7 +36,6 @@ export function ClientsForm() {
     return null;
   };
 
-  // const validation = isFormValid(fio, register, birthday, phone);
   return (
     <div>
       {error && error.message && <ErrorMessage text={error.message} />}
@@ -49,6 +47,7 @@ export function ClientsForm() {
           setError(err ? err : null);
         }}
       >
+        <span className="field-label">ФИО</span>
         <input
           type="text"
           className="form-field"
@@ -58,6 +57,8 @@ export function ClientsForm() {
             setFio(e.target.value);
           }}
         />
+
+        <span className="field-label">Данные о прописке</span>
         <input
           type="text"
           className="form-field"
@@ -67,27 +68,19 @@ export function ClientsForm() {
             setRegister(e.target.value);
           }}
         />
+
+        <span className="field-label">Дата рождения</span>
         <input
-          type="text"
+          type="date"
           className="form-field"
           placeholder="Дата рождения"
           value={birthday || ''}
           onChange={(e) => {
-            if (e.target.value.length === 2) {
-              e.target.value += '.';
-            }
-
-            if (e.target.value.length === 5) {
-              e.target.value += '.';
-            }
-
-            if (e.target.value.length > 10) {
-              e.target.value = birthday;
-            }
-
             setBirthday(e.target.value);
           }}
         />
+
+        <span className="field-label">Номер телефона</span>
         <input
           type="text"
           className="form-field"
@@ -116,7 +109,30 @@ export function ClientsForm() {
         <button
           className="form-button"
           onClick={() => {
-            // submit(true);
+            if (_.isNull(error)) {
+              axios
+                .post('http://localhost/clients', {
+                  fio,
+                  register,
+                  birthday,
+                  phone,
+                })
+                .then(function (response) {
+                  const data = response.data;
+                  if (data.message === 'ok') {
+                    console.log(data);
+                    setFio(null);
+                    setRegister(null);
+                    setBirthday(null);
+                    setPhone(null);
+                  } else {
+                    setError({ message: 'запрос не выполнен' });
+                  }
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+            }
           }}
         >
           Добавить

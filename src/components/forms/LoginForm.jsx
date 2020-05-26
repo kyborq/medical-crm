@@ -1,31 +1,26 @@
-import React, { useState } from "react";
-import { ErrorMessage } from "../ErrorMessage";
-import _ from "lodash";
+import React, { useState } from 'react';
+import { ErrorMessage } from '../ErrorMessage';
+import _ from 'lodash';
+import axios from 'axios';
 
-import "./FormStyle.css";
-
-const Data = {
-  login: "user1",
-  password: "pass123",
-};
+import './FormStyle.css';
 
 export function LoginForm() {
   const [login, setLogin] = useState(null);
   const [password, setPassword] = useState(null);
   const [error, setError] = useState(null);
-  // const [isSubmit, submit] = useState(false);
 
   const isFormValid = (login, password) => {
     if (_.isNull(login) || _.isNull(password)) {
-      return { message: "Заполните все поля" };
+      return { message: 'Заполните все поля' };
     }
 
     if (_.isNull(login) || _.isEmpty(login)) {
-      return { message: "Логин введен неверно" };
+      return { message: 'Логин введен неверно' };
     }
 
     if (_.isNull(password) || _.isEmpty(password) || password.length < 6) {
-      return { message: "Пароль введен неверно" };
+      return { message: 'Пароль введен неверно' };
     }
 
     return null;
@@ -35,18 +30,22 @@ export function LoginForm() {
     <div className="auth-form">
       <h2 className="form-title">Войти в систему</h2>
 
-      <form onSubmit={(e) => {
-        e.preventDefault(); // чтобы не происходил HTTP запрос
-        const err = isFormValid(login, password);
-        console.log(err);
-        setError(err ? err : null);
-      }}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault(); // чтобы не происходил HTTP запрос
+          const err = isFormValid(login, password);
+          console.log(err);
+          setError(err ? err : null);
+        }}
+      >
+        {error && error.message && <ErrorMessage text={error.message} />}
+
         <span className="field-label">Логин:</span>
         <input
           type="text"
           className="form-field"
           placeholder="Имя пользователя"
-          onChange={(e) => {
+          onInput={(e) => {
             setLogin(e.target.value);
           }}
         />
@@ -56,19 +55,33 @@ export function LoginForm() {
           type="password"
           className="form-field"
           placeholder="Пароль"
-          onChange={(e) => {
+          onInput={(e) => {
             setPassword(e.target.value);
           }}
         />
 
-        {error && error.message && (
-          <ErrorMessage text={error.message} />
-        )}
-
         <button
           className="form-button"
           onClick={() => {
-            // submit(true);
+            axios
+              .post('http://localhost/auth', {
+                login,
+                password,
+              })
+              .then(function (response) {
+                const data = response.data;
+              
+                if (data.message === 'ok' && data.content.length > 0) {
+                  sessionStorage.setItem('login', data.user_id);
+                  location.href = '/dashboard';
+                } else {
+                  console.log('ошибка входа');
+                  setError({ message: 'пользователь не найден' });
+                }
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
           }}
         >
           Войти

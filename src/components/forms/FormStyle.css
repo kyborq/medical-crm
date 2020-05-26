@@ -24,6 +24,7 @@
 }
 
 .form-button {
+  margin-top: 12px;
   outline: none;
   width: 100%;
   box-sizing: border-box;
@@ -52,9 +53,11 @@
 }
 
 .field-label {
-  font-size: 14px;
+  font-size: 12px;
+  padding-left: 12px;
   display: block;
-  margin-bottom: 8px;
+  margin-top: 8px;
+  margin-bottom: 4px;
   color: #b3b3b3;
 }
 
