@@ -10,7 +10,34 @@ import { Content } from '../components/containers/Content';
 import { Page } from '../components/containers/Page';
 import { RightSidebar } from '../components/containers/RightSidebar';
 
+import { TimeTable, TimeTableRow } from '../components/TimeTable';
+
+const schedule = {
+  schedule: [
+    {
+      stuffId: 1,
+      stuffName: 'Doctor Name',
+      records: [
+        // or empty (if no record for this doctor)
+        {
+          recordId: 1,
+          date: '2019-12-12 08:00',
+          serviceId: 2,
+          serviceName: 'service name',
+          serviceDuration: 60, // minutes
+          clientId: 1,
+          clientFio: 'Ivanov Ivan Ivanovich',
+        },
+      ],
+    },
+  ],
+};
+
 export function SchedulePage() {
+  const generateTimeGrid = (start, end, interval) => {
+    // ... TODO
+  };
+
   return (
     <Page>
       <Sidebar />
@@ -19,7 +46,11 @@ export function SchedulePage() {
         <Header title="Расписание" />
 
         <Container>
-          <Content></Content>
+          <Content>
+            <TimeTable>
+              <TimeTableRow></TimeTableRow>
+            </TimeTable>
+          </Content>
 
           <RightSidebar></RightSidebar>
         </Container>
