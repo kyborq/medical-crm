@@ -16,6 +16,10 @@ export function TimeTableRow({ children }) {
   return <div className="flex-table-row">{children}</div>;
 }
 
+export function TimeTableCell({ value, children }) {
+  return <div className="flex-table-cell">{value || children}</div>;
+}
+
 export function TimeTable({ children }) {
   return <div className="flex-table">{children}</div>;
 }

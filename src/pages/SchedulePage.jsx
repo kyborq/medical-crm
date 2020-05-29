@@ -10,34 +10,59 @@ import { Content } from '../components/containers/Content';
 import { Page } from '../components/containers/Page';
 import { RightSidebar } from '../components/containers/RightSidebar';
 
-import { TimeTable, TimeTableRow } from '../components/TimeTable';
+import { TimeTable, TimeTableRow, TimeTableCell } from '../components/TimeTable';
 
-const schedule = {
-  schedule: [
-    {
-      stuffId: 1,
-      stuffName: 'Doctor Name',
-      records: [
-        // or empty (if no record for this doctor)
-        {
-          recordId: 1,
-          date: '2019-12-12 08:00',
-          serviceId: 2,
-          serviceName: 'service name',
-          serviceDuration: 60, // minutes
-          clientId: 1,
-          clientFio: 'Ivanov Ivan Ivanovich',
-        },
-      ],
-    },
-  ],
-};
+const scheduleList = [
+  {
+    doctorid: 1,
+    doctor: 'Иванов И. И.',
+    records: [
+      {
+        id: 1,
+        doctorid: 1,
+        time: '8:0',
+        name: 'Удаление зуба',
+      },
+      {
+        id: 2,
+        doctorid: 1,
+        time: '8:30',
+        name: 'Лечение зуба',
+      },
+    ],
+  },
+  {
+    doctorid: 2,
+    doctor: 'Lorem I. S.',
+    records: [
+      {
+        id: 3,
+        doctorid: 2,
+        time: '9:0',
+        name: 'Вставка пломбы',
+      },
+    ],
+  },
+];
 
 export function SchedulePage() {
   const generateTimeGrid = (start, end, interval) => {
-    // ... TODO
+    let timeStart = new Date(`2020 ${start}`);
+    let timeEnd = new Date(`2020 ${end}`);
+
+    let timeArray = [];
+
+    timeArray.push(`${timeStart.getHours()}:${timeStart.getMinutes()}`);
+
+    while (timeStart.getHours() !== timeEnd.getHours()) {
+      timeStart.setMinutes(timeStart.getMinutes() + interval);
+      timeArray.push(`${timeStart.getHours()}:${timeStart.getMinutes()}`);
+    }
+
+    return timeArray;
   };
 
+  const timeGrid = generateTimeGrid('08:00', '21:00', 30);
   return (
     <Page>
       <Sidebar />
@@ -48,7 +73,24 @@ export function SchedulePage() {
         <Container>
           <Content>
             <TimeTable>
-              <TimeTableRow></TimeTableRow>
+              <TimeTableRow header>
+                <TimeTableCell value="Время" />
+                {scheduleList.map((schedule) => (
+                  <TimeTableCell value={schedule.doctor} />
+                ))}
+              </TimeTableRow>
+
+              {timeGrid.map((time) => {
+                return (
+                  <TimeTableRow>
+                    <TimeTableCell value={time} />
+                    {scheduleList.map((schedule) => {
+                      const record = schedule.records.find((record) => record.time === time);
+                      return <TimeTableCell value={record ? record.name : ''} />;
+                    })}
+                  </TimeTableRow>
+                );
+              })}
             </TimeTable>
           </Content>
 
