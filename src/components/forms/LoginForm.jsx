@@ -5,11 +5,6 @@ import axios from 'axios';
 
 import './FormStyle.css';
 
-const Data = {
-  login: 'user1',
-  password: 'pass123',
-};
-
 export function LoginForm() {
   const [login, setLogin] = useState(null);
   const [password, setPassword] = useState(null);
@@ -43,6 +38,8 @@ export function LoginForm() {
           setError(err ? err : null);
         }}
       >
+        {error && error.message && <ErrorMessage text={error.message} />}
+
         <span className="field-label">Логин:</span>
         <input
           type="text"
@@ -73,8 +70,9 @@ export function LoginForm() {
               })
               .then(function (response) {
                 const data = response.data;
+              
                 if (data.message === 'ok' && data.content.length > 0) {
-                  console.log(data);
+                  sessionStorage.setItem('login', data.user_id);
                   location.href = '/dashboard';
                 } else {
                   console.log('ошибка входа');
@@ -88,8 +86,6 @@ export function LoginForm() {
         >
           Войти
         </button>
-
-        {error && error.message && <ErrorMessage text={error.message} />}
       </form>
     </div>
   );

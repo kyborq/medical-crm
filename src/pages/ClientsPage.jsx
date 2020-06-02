@@ -18,18 +18,21 @@ export function ClientsPage() {
   const [stuffList, setStuffList] = useState([]);
 
   useEffect(() => {
-    console.log('Clients page loaded');
-    axios
-      .get('http://localhost/clients')
-      .then(function (response) {
-        const data = response.data;
-        if (data.message === 'ok') {
-          console.log(data);
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    if (!sessionStorage.getItem('login')) {
+      location.href = '/';
+    } else {
+      axios
+        .get('http://localhost/clients')
+        .then(function (response) {
+          const data = response.data;
+          if (data.message === 'ok') {
+            console.log(data);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   });
 
   return (

@@ -18,18 +18,21 @@ export function ServicesPage() {
   const [servicesList, setServicesList] = useState([]);
 
   useEffect(() => {
-    console.log('Services page loaded');
-    axios
-      .get('http://localhost/services')
-      .then(function (response) {
-        const data = response.data;
-        if (data.message === 'ok') {
-          console.log(data);
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    if (!sessionStorage.getItem('login')) {
+      location.href = '/';
+    } else {
+      axios
+        .get('http://localhost/services')
+        .then(function (response) {
+          const data = response.data;
+          if (data.message === 'ok') {
+            console.log(data);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   });
 
   return (
