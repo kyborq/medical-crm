@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import './FormStyle.css';
 
-export function ServicesForm() {
+export function ServicesForm({ onSubmitAdd }) {
   const [service, setService] = useState(null);
   const [cost, setCost] = useState(null);
   const [duration, setDuration] = useState(null);
@@ -94,6 +94,7 @@ export function ServicesForm() {
                     setService(null);
                     setCost(null);
                     setDuration(null);
+                    onSubmitAdd();
                   } else {
                     setError({ message: 'запрос не выполнен' });
                   }

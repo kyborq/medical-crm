@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import _ from 'lodash';
 
 import { ErrorMessage } from '../ErrorMessage';
 
 import './FormStyle.css';
 
-export function ClientsForm() {
+export function ClientsForm({ onSubmitAdd }) {
   const [fio, setFio] = useState(null);
   const [register, setRegister] = useState(null);
   const [birthday, setBirthday] = useState(null);
@@ -125,11 +126,13 @@ export function ClientsForm() {
                     setRegister(null);
                     setBirthday(null);
                     setPhone(null);
+                    onSubmitAdd();
                   } else {
-                    setError({ message: 'запрос не выполнен' });
+                    setError({ message: data.message });
                   }
                 })
                 .catch(function (error) {
+                  console.log(data);
                   console.log(error);
                 });
             }

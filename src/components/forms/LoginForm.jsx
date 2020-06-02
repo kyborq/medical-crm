@@ -70,9 +70,11 @@ export function LoginForm() {
               })
               .then(function (response) {
                 const data = response.data;
-              
-                if (data.message === 'ok' && data.content.length > 0) {
+
+                if (data.message === 'ok') {
                   sessionStorage.setItem('login', data.user_id);
+                  console.log(data);
+
                   location.href = '/dashboard';
                 } else {
                   console.log('ошибка входа');

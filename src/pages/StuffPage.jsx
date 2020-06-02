@@ -17,23 +17,30 @@ import { StuffForm } from '../components/forms/StuffForm';
 export function StuffPage() {
   const [stuffList, setStuffList] = useState([]);
 
+  const updateList = () => {
+    axios
+      .get('http://localhost/stuff')
+      .then(function (response) {
+        const data = response.data;
+        if (data.message === 'ok') {
+          // ... TODO
+          console.log(data);
+
+          setStuffList(data.content);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     if (!sessionStorage.getItem('login')) {
       location.href = '/';
     } else {
-      axios
-        .get('http://localhost/stuff')
-        .then(function (response) {
-          const data = response.data;
-          if (data.message === 'ok') {
-            // ... TODO
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      updateList();
     }
-  });
+  }, []);
 
   return (
     <Page>
@@ -47,14 +54,14 @@ export function StuffPage() {
             <Table>
               <TableHeader values={['ФИО', 'Специализация', 'Время приема']} />
               {stuffList.map((stuff) => (
-                <TableRow key={stuff.id} values={[stuff.fio, stuff.spec, stuff.dur]} />
+                <TableRow key={stuff.id} values={[stuff.fio, stuff.spec, stuff.time]} />
               ))}
             </Table>
           </Content>
 
           <RightSidebar>
             <Panel title="Добавить">
-              <StuffForm />
+              <StuffForm onSubmitAdd={updateList} />
             </Panel>
           </RightSidebar>
         </Container>

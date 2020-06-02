@@ -17,23 +17,28 @@ import { ClientsForm } from '../components/forms/ClientsForm';
 export function ClientsPage() {
   const [stuffList, setStuffList] = useState([]);
 
+  const updateList = () => {
+    axios
+      .get('http://localhost/clients')
+      .then(function (response) {
+        const data = response.data;
+        if (data.message === 'ok') {
+          console.log(data);
+          setStuffList(data.content);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     if (!sessionStorage.getItem('login')) {
       location.href = '/';
     } else {
-      axios
-        .get('http://localhost/clients')
-        .then(function (response) {
-          const data = response.data;
-          if (data.message === 'ok') {
-            console.log(data);
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      updateList();
     }
-  });
+  }, []);
 
   return (
     <Page>
@@ -47,14 +52,14 @@ export function ClientsPage() {
             <Table>
               <TableHeader values={['ФИО', 'Данные о прописке', 'Дата рождения', 'Номер телефона']} />
               {stuffList.map((stuff) => (
-                <TableRow key={stuff.id} values={[stuff.fio, stuff.reg, stuff.bday, stuff.phone]} />
+                <TableRow key={stuff.id} values={[stuff.fio, stuff.registration, stuff.bday, stuff.phone]} />
               ))}
             </Table>
           </Content>
 
           <RightSidebar>
             <Panel title="Добавить">
-              <ClientsForm />
+              <ClientsForm onSubmitAdd={updateList} />
             </Panel>
           </RightSidebar>
         </Container>
