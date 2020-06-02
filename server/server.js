@@ -23,7 +23,7 @@ app.use(cors());
 
 connection.query('SET SESSION wait_timeout = 604800'); // Seven days connection timeout
 
-// ------------------------------ POST 
+// ------------------------------ POST
 app.post('/auth', function (req, res) {
   const query = 'SELECT * FROM users WHERE `login`="' + req.body.login + '" AND `password`="' + req.body.password + '"';
 
@@ -52,11 +52,13 @@ app.post('/services', function (req, res) {
 });
 
 app.post('/clients', function (req, res) {
-  const query = 'INSERT INTO `clients`(`clinic_id`, `fio`, `registration`, `bday`, `phone`) VALUES (1,' + req.body.fio + ',' + req.body.register + ',' + req.body.birthday + ',' + req.body.phone + ')';
+  const query =
+    'INSERT INTO `clients`(`clinic_id`, `fio`, `registration`, `bday`, `phone`) VALUES (1,"' + req.body.fio + '","' + req.body.register + '","' + req.body.birthday + '","' + req.body.phone + '")';
 
   connection.query(query, function (error, results, fields) {
     if (error) {
-      res.send(JSON.stringify({ message: 'непредвиденная ошибка', error: 1 }));
+      res.send(JSON.stringify({ message: 'непредвиденная ошибка', error: 1, err_message: error }));
+      console.log(error);
     }
     res.send(JSON.stringify({ message: 'ok' })); // результат из result можно запихнуть в ответ
   });
@@ -73,7 +75,7 @@ app.post('/stuff', function (req, res) {
   });
 });
 
-// ------------------------------ GET 
+// ------------------------------ GET
 app.get('/stuff', function (req, res) {
   const query = 'SELECT * FROM stuff WHERE `clinic_id`=1';
 

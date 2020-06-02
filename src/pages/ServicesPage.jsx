@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import { Sidebar } from '../components/sidebar/Sidebar';
@@ -17,23 +17,30 @@ import { ServicesForm } from '../components/forms/ServicesForm';
 export function ServicesPage() {
   const [servicesList, setServicesList] = useState([]);
 
+  const updateList = () => {
+    console.log('up');
+
+    axios
+      .get('http://localhost/services')
+      .then(function (response) {
+        const data = response.data;
+        if (data.message === 'ok') {
+          console.log(data);
+          setServicesList(data.content);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     if (!sessionStorage.getItem('login')) {
       location.href = '/';
     } else {
-      axios
-        .get('http://localhost/services')
-        .then(function (response) {
-          const data = response.data;
-          if (data.message === 'ok') {
-            console.log(data);
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      updateList();
     }
-  });
+  }, []);
 
   return (
     <Page>
@@ -47,14 +54,14 @@ export function ServicesPage() {
             <Table>
               <TableHeader values={['Название услуги', 'Цена', 'Продолжительность (мин)']} />
               {servicesList.map((service) => (
-                <TableRow key={service.id} values={[service.service, service.cost, service.dur]} />
+                <TableRow key={service.id} values={[service.name, service.cost, service.duration]} />
               ))}
             </Table>
           </Content>
 
           <RightSidebar>
             <Panel title="Добавить услугу">
-              <ServicesForm />
+              <ServicesForm onSubmitAdd={updateList} />
             </Panel>
           </RightSidebar>
         </Container>
