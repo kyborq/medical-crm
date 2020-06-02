@@ -15,6 +15,7 @@ import { RightSidebar } from '../components/containers/RightSidebar';
 
 import { TimeTable, TimeTableRow, TimeTableCell } from '../components/TimeTable';
 import { CellCard } from '../components/CellCard';
+import { Modal } from '../components/Modal';
 
 const scheduleList = [
   {
@@ -54,6 +55,7 @@ const scheduleList = [
 
 export function SchedulePage() {
   const [currentDate, setDate] = useState(moment().format('yyyy-MM-DD'));
+  const [modalOpened, setModalOpened] = useState(false);
 
   const generateTimeGrid = (start, end, interval) => {
     const startTime = moment(start, 'HHmm');
@@ -70,6 +72,10 @@ export function SchedulePage() {
 
     timeArray.push(endTime.format('HH:mm'));
     return timeArray;
+  };
+
+  const showModal = () => {
+    setModalOpened(true);
   };
 
   const timeGrid = generateTimeGrid('08:00', '21:00', 30);
@@ -96,7 +102,7 @@ export function SchedulePage() {
                     <TimeTableCell value={time} />
                     {scheduleList.map((schedule) => {
                       const record = schedule.records.find((record) => record.time === time && record.date === currentDate);
-                      return <TimeTableCell value={record ? <CellCard text={record.name} /> : ''} />;
+                      return <TimeTableCell value={record ? <CellCard text={record.name} onClick={showModal} /> : ''} />;
                     })}
                   </TimeTableRow>
                 );
@@ -126,6 +132,16 @@ export function SchedulePage() {
           </RightSidebar>
         </Container>
       </Wrap>
+
+      <Modal
+        title="Modal"
+        isOpen={modalOpened}
+        onClose={() => {
+          setModalOpened(false);
+        }}
+      >
+        Hello!
+      </Modal>
     </Page>
   );
 }
