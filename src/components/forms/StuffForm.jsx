@@ -16,7 +16,7 @@ const specList = [
 ];
 
 // Форма для добавления персонала в таблицу
-export function StuffForm() {
+export function StuffForm({ onSubmitAdd }) {
   const [fio, setFio] = useState(null);
   const [spec, setSpec] = useState(null);
   const [dur, setDur] = useState(null);
@@ -76,7 +76,7 @@ export function StuffForm() {
         <input
           type="number"
           min="5"
-          max="30"
+          max="60"
           className="form-field"
           placeholder="Время приема"
           value={dur || 0}
@@ -102,6 +102,7 @@ export function StuffForm() {
                     setFio(null);
                     setSpec(null);
                     setDur(null);
+                    onSubmitAdd();
                   } else {
                     setError({ message: 'запрос не выполнен' });
                   }
