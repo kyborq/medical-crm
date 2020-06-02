@@ -13,6 +13,7 @@ export function Navigation() {
       <NavigationButton link="/clients" icon="people" label="Клиенты" />
       <NavigationButton link="/services" icon="assignment" label="Услуги" />
       <NavigationButton link="/records" icon="schedule" label="Заявки" />
+      <NavigationButton link="/schedule" icon="schedule" label="Расписание" />
 
       {sessionStorage.getItem('login') && (
         <SidebarButton
@@ -25,7 +26,6 @@ export function Navigation() {
           }}
         />
       )}
-      
     </div>
   );
 }
