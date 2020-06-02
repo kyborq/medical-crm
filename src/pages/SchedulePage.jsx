@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import axios from 'axios';
+
+moment.locale('ru');
 
 import { Sidebar } from '../components/sidebar/Sidebar';
 import { Header } from '../components/Header';
@@ -20,13 +23,15 @@ const scheduleList = [
       {
         id: 1,
         doctorid: 1,
-        time: '8:0',
+        time: '08:00',
+        date: '2020-06-02',
         name: 'Удаление зуба',
       },
       {
         id: 2,
         doctorid: 1,
-        time: '8:30',
+        time: '08:30',
+        date: '2020-06-02',
         name: 'Лечение зуба',
       },
     ],
@@ -38,7 +43,8 @@ const scheduleList = [
       {
         id: 3,
         doctorid: 2,
-        time: '9:0',
+        time: '09:00',
+        date: '2020-06-02',
         name: 'Вставка пломбы',
       },
     ],
@@ -46,19 +52,22 @@ const scheduleList = [
 ];
 
 export function SchedulePage() {
+  const [currentDate, setDate] = useState(moment().format('yyyy-MM-DD'));
+
   const generateTimeGrid = (start, end, interval) => {
-    let timeStart = new Date(`2020 ${start}`);
-    let timeEnd = new Date(`2020 ${end}`);
+    const startTime = moment(start, 'HHmm');
+    const endTime = moment(end, 'HHmm');
 
-    let timeArray = [];
+    const timeArray = [];
 
-    timeArray.push(`${timeStart.getHours()}:${timeStart.getMinutes()}`);
+    let tmpTime = startTime.format('HH:mm');
 
-    while (timeStart.getHours() !== timeEnd.getHours()) {
-      timeStart.setMinutes(timeStart.getMinutes() + interval);
-      timeArray.push(`${timeStart.getHours()}:${timeStart.getMinutes()}`);
+    while (tmpTime < endTime.format('HH:mm')) {
+      timeArray.push(tmpTime);
+      tmpTime = moment(tmpTime, 'HHmm').add(interval, 'minutes').format('HH:mm');
     }
 
+    timeArray.push(endTime.format('HH:mm'));
     return timeArray;
   };
 
@@ -68,7 +77,7 @@ export function SchedulePage() {
       <Sidebar />
 
       <Wrap>
-        <Header title="Расписание" />
+        <Header title={'Расписание на ' + moment(currentDate).format('LL')} />
 
         <Container>
           <Content>
@@ -85,7 +94,7 @@ export function SchedulePage() {
                   <TimeTableRow>
                     <TimeTableCell value={time} />
                     {scheduleList.map((schedule) => {
-                      const record = schedule.records.find((record) => record.time === time);
+                      const record = schedule.records.find((record) => record.time === time && record.date === currentDate);
                       return <TimeTableCell value={record ? record.name : ''} />;
                     })}
                   </TimeTableRow>
@@ -94,7 +103,26 @@ export function SchedulePage() {
             </TimeTable>
           </Content>
 
-          <RightSidebar></RightSidebar>
+          <RightSidebar>
+            <Panel title="Выбрать дату">
+              <input
+                type="date"
+                className="form-field"
+                value={currentDate}
+                onChange={(e) => {
+                  setDate(e.target.value);
+                }}
+              />
+              <button
+                className="form-button"
+                onClick={() => {
+                  setDate(moment().format('yyyy-MM-DD'));
+                }}
+              >
+                Сбросить
+              </button>
+            </Panel>
+          </RightSidebar>
         </Container>
       </Wrap>
     </Page>
