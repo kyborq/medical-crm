@@ -14,6 +14,7 @@ import { Page } from '../components/containers/Page';
 import { RightSidebar } from '../components/containers/RightSidebar';
 
 import { TimeTable, TimeTableRow, TimeTableCell } from '../components/TimeTable';
+import { CellCard } from '../components/CellCard';
 
 const scheduleList = [
   {
@@ -95,7 +96,7 @@ export function SchedulePage() {
                     <TimeTableCell value={time} />
                     {scheduleList.map((schedule) => {
                       const record = schedule.records.find((record) => record.time === time && record.date === currentDate);
-                      return <TimeTableCell value={record ? record.name : ''} />;
+                      return <TimeTableCell value={record ? <CellCard text={record.name} /> : ''} />;
                     })}
                   </TimeTableRow>
                 );

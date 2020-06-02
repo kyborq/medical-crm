@@ -1,0 +1,9 @@
+.cell-card {
+  padding: 5px;
+  background: #2ba9e6;
+  font-size: 13px;
+  border-radius: 5px;
+  text-align: center;
+  color: #ffffff;
+  cursor: pointer;
+}

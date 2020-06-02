@@ -1,12 +1,15 @@
 .flex-table-header {
+  margin-bottom: 16px;
+  border-radius: 16px;
   width: 100%;
   display: flex;
-  background-color: white;
-  border-radius: 16px;
   font-weight: bold;
+  font-size: 14px;
   text-align: center;
-  margin-bottom: 16px;
-  box-shadow: 0 0 5px #e2e2e2;
+}
+
+.flex-table-header .flex-table-cell {
+  padding: 8px;
 }
 
 .flex-table-row {
@@ -16,10 +19,25 @@
   background-color: white;
   border-radius: 16px;
   box-shadow: 0 0 5px #e2e2e2;
-  cursor: pointer;
+}
+
+.flex-table-row.row-header {
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  background: none;
+  box-shadow: none;
+}
+
+.flex-table-row.row-header .flex-table-cell {
+  padding: 8px;
 }
 
 .flex-table-cell {
   padding: 24px;
   width: 100%;
+}
+
+.flex-table-cell.cell-card-container {
+  padding: 8px;
 }
