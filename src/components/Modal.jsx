@@ -7,9 +7,6 @@ export function Modal({ children, isOpen, onClose, title }) {
   return (
     <div
       className={classnames('modal-dialogue', isOpen ? 'opened' : '')}
-      onClick={() => {
-        onClose();
-      }}
     >
       <div className="modal-container">
         <div className="modal-header">

@@ -84,7 +84,17 @@ export function SchedulePage() {
       <Sidebar />
 
       <Wrap>
-        <Header title={'Расписание на ' + moment(currentDate).format('LL')} />
+        <Header title={'Расписание на ' + moment(currentDate).format('LL')}> 
+        <span className="field-label">Выбор даты</span>
+        <input
+                type="date"
+                className="form-field"
+                value={currentDate}
+                onChange={(e) => {
+                  setDate(e.target.value);
+                }}
+              />
+        </Header>
 
         <Container>
           <Content>
@@ -99,37 +109,16 @@ export function SchedulePage() {
               {timeGrid.map((time) => {
                 return (
                   <TimeTableRow>
-                    <TimeTableCell value={time} />
+                    <TimeTableCell value={time} header />
                     {scheduleList.map((schedule) => {
                       const record = schedule.records.find((record) => record.time === time && record.date === currentDate);
-                      return <TimeTableCell value={record ? <CellCard text={record.name} onClick={showModal} /> : ''} />;
+                      return <TimeTableCell value={record ? <CellCard text={record.name} /> : ''} onClick={showModal} />;
                     })}
                   </TimeTableRow>
                 );
               })}
             </TimeTable>
           </Content>
-
-          <RightSidebar>
-            <Panel title="Выбрать дату">
-              <input
-                type="date"
-                className="form-field"
-                value={currentDate}
-                onChange={(e) => {
-                  setDate(e.target.value);
-                }}
-              />
-              <button
-                className="form-button"
-                onClick={() => {
-                  setDate(moment().format('yyyy-MM-DD'));
-                }}
-              >
-                Сбросить
-              </button>
-            </Panel>
-          </RightSidebar>
         </Container>
       </Wrap>
 
@@ -140,7 +129,18 @@ export function SchedulePage() {
           setModalOpened(false);
         }}
       >
-        Hello!
+        <span className="field-label">Дата</span>
+        <input type="date" className="form-field" />
+        <span className="field-label">Время</span>
+        <input type="time" className="form-field" />
+        <span className="field-label">Врач</span>
+        <input type="text" className="form-field" />
+        <span className="field-label">Услуга</span>
+        <select className="form-field">
+          <option value=""></option>
+        </select>
+
+        <button className="form-button">Записать</button>
       </Modal>
     </Page>
   );

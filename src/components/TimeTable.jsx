@@ -7,8 +7,10 @@ export function TimeTableRow({ children, header }) {
   return <div className={classnames('flex-table-row', header ? 'row-header' : '')}>{children}</div>;
 }
 
-export function TimeTableCell({ value, children }) {
-  return <div className="flex-table-cell">{value || children}</div>;
+export function TimeTableCell({ value, children, onClick, header }) {
+  return <div className={classnames("flex-table-cell", header ? 'cell-header' : '')} onClick={()=>{
+    onClick()
+  }}>{value || children}</div>;
 }
 
 export function TimeTable({ children }) {
