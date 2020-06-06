@@ -4,11 +4,11 @@ import classnames from 'classnames';
 import './Table.css';
 
 export function TimeTableRow({ children, header }) {
-  return <div className={classnames('flex-table-row', header ? 'row-header' : '')}>{children}</div>;
+  return <div className={classnames('flex-table-row', 'time', header ? 'row-header' : '')}>{children}</div>;
 }
 
 export function TimeTableCell({ value, children, onClick, header }) {
-  return <div className={classnames("flex-table-cell", header ? 'cell-header' : '')} onClick={()=>{
+  return <div className={classnames("flex-table-cell", 'time', header ? 'cell-header' : '')} onClick={()=>{
     onClick()
   }}>{value || children}</div>;
 }

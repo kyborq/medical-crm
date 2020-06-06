@@ -30,6 +30,10 @@
 }
 
 .flex-table-row.row-header .flex-table-cell {
+  padding: 8px;
+}
+
+.flex-table-row.row-header.time .flex-table-cell {
   padding: 8px 24px;
   border-right: 1px solid #d2d2d2;
 }
@@ -37,9 +41,16 @@
 .flex-table-cell {
   padding: 24px;
   width: 150px;
+  border-right: 1px solid #e2e2e2;
+}    
+
+.flex-table-cell.time {
+  padding: 24px;
+  width: 150px;
   border-right: 1px solid #d2d2d2;
   width: 101px;
 }    
+
 
 .flex-table-cell.cell-card-container {
   padding: 8px;
