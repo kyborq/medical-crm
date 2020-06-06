@@ -124,8 +124,7 @@ export function RecordForm({ selDate, selTime, selDoctor }) {
         className='form-button'
         onClick={() => {
           if (_.isNull(isFormValid(date, time, doctor, service))) {
-            // TODO: Перенести мокап данных в стейт
-            // TODO: Добавить выполнение запросов и обновление данных
+            // TODO: Добавить добавление записей
             // axios
             //   .post('http://localhost/records', {
             //     date,

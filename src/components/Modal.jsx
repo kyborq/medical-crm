@@ -3,7 +3,7 @@ import classnames from 'classnames';
 
 import './Modal.css';
 
-export function Modal({ children, isOpen, onClose, title }) {
+export function Modal({ children, onClose, title }) {
   return (
     <div className={classnames('modal-dialogue')}>
       <div className='modal-container'>

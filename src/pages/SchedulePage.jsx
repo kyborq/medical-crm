@@ -19,6 +19,7 @@ import { Modal } from '../components/Modal';
 import { SelectBox } from '../components/SelectBox';
 import { RecordForm } from '../components/forms/RecordForm';
 
+// TODO: Убрать мокап данных расписания
 const scheduleList = [
   {
     doctorid: 1,
@@ -57,11 +58,13 @@ const scheduleList = [
 
 export function SchedulePage() {
   const [currentDate, setDate] = useState(moment().format('yyyy-MM-DD'));
-  const [modalOpened, setModalOpened] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
 
   const [selectedTime, selectTime] = useState();
   const [selectedDoctor, selectDoctor] = useState();
+
+  // TODO: Добавить выполнение ГЕТ запроса для расписания
+  useEffect(() => {});
 
   const generateTimeGrid = (start, end, interval) => {
     const startTime = moment(start, 'HHmm');
@@ -78,10 +81,6 @@ export function SchedulePage() {
 
     timeArray.push(endTime.format('HH:mm'));
     return timeArray;
-  };
-
-  const showModal = () => {
-    setModalOpened(true);
   };
 
   const timeGrid = generateTimeGrid('08:00', '21:00', 30);
@@ -108,7 +107,6 @@ export function SchedulePage() {
             <TimeTable>
               <TimeTableRow header>
                 <TimeTableCell value='' />
-                {/* TODO: при запросе из БД будут полные имена докторов и их нужно перевести в краткую форму вот тут */}
                 {scheduleList.map((schedule) => (
                   <TimeTableCell key={schedule.doctorid} value={schedule.doctor} />
                 ))}
@@ -119,9 +117,7 @@ export function SchedulePage() {
                   <TimeTableRow>
                     <TimeTableCell key={time} value={time} header />
                     {scheduleList.map((schedule) => {
-                      const record = schedule.records.find(
-                        (record) => record.time === time && record.date === currentDate
-                      );
+                      const record = schedule.records.find((record) => record.time === time && record.date === currentDate);
                       return (
                         <TimeTableCell
                           placeholder='+'
@@ -143,7 +139,6 @@ export function SchedulePage() {
       {showAddModal ? (
         <Modal
           title='Modal'
-          isOpen={modalOpened}
           onClose={() => {
             setShowAddModal(false);
           }}

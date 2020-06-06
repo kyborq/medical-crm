@@ -53,7 +53,15 @@ app.post('/services', function (req, res) {
 
 app.post('/clients', function (req, res) {
   const query =
-    'INSERT INTO `clients`(`clinic_id`, `fio`, `registration`, `bday`, `phone`) VALUES (1,"' + req.body.fio + '","' + req.body.register + '","' + req.body.birthday + '","' + req.body.phone + '")';
+    'INSERT INTO `clients`(`clinic_id`, `fio`, `registration`, `bday`, `phone`) VALUES (1,"' +
+    req.body.fio +
+    '","' +
+    req.body.register +
+    '","' +
+    req.body.birthday +
+    '","' +
+    req.body.phone +
+    '")';
 
   connection.query(query, function (error, results, fields) {
     if (error) {
@@ -66,6 +74,26 @@ app.post('/clients', function (req, res) {
 
 app.post('/stuff', function (req, res) {
   const query = 'INSERT INTO `stuff`(`clinic_id`, `fio`, `spec`, `time`) VALUES (1,"' + req.body.fio + '","' + req.body.spec + '",' + req.body.dur + ')';
+
+  connection.query(query, function (error, results, fields) {
+    if (error) {
+      res.send(JSON.stringify({ message: 'непредвиденная ошибка', error: 1 }));
+    }
+    res.send(JSON.stringify({ message: 'ok' })); // результат из result можно запихнуть в ответ
+  });
+});
+
+app.post('/records', function (req, res) {
+  const query =
+    'INSERT INTO `records`(`clinic_id`, `datetime`, `service_id`, `client_id`, `stuff_id`) VALUES (`1,"' +
+    req.body.datetime +
+    '",' +
+    req.body.serviceID +
+    ',' +
+    req.body.clientID +
+    ',' +
+    req.body.stuffID +
+    ')';
 
   connection.query(query, function (error, results, fields) {
     if (error) {
