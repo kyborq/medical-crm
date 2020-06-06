@@ -3,9 +3,7 @@
   position: fixed;
   width: 100%;
   height: 100vh;
-}
 
-.modal-dialogue.opened {
   display: flex;
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(5px);
@@ -15,14 +13,14 @@
   margin: auto;
   padding: 16px;
   width: 250px;
-  border-radius: 5px;
+  border-radius: 16px;
   background-color: white;
 }
 
 .modal-header {
   display: flex;
   margin-bottom: 16px;
-  padding-bottom: 8px;
+  padding-bottom: 16px;
   border-bottom: 1px solid #e2e2e2;
 }
 
@@ -38,15 +36,16 @@
 }
 
 .modal-action-button {
-  background: #e27878;
-  color: white;
+  background: white;
+  color: #e27878;
   border: none;
   padding: 4px;
-  border-radius: 5px;
+  border-radius: 100%;
   cursor: pointer;
   outline: none;
 }
 
 .modal-action-button:active {
-  background: #b65858;
+  background: #e27878;
+  color: white;
 }

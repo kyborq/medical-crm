@@ -36,8 +36,6 @@ export function RecordsPage() {
               <TableRow key={record.id} values={[record.clientFio, record.doctorFio, record.serviceName, record.date]} />
             ))}
           </Content>
-
-          <RightSidebar></RightSidebar>
         </Container>
       </Wrap>
     </Page>

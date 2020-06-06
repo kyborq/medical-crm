@@ -7,12 +7,20 @@ export function TimeTableRow({ children, header }) {
   return <div className={classnames('flex-table-row', 'time', header ? 'row-header' : '')}>{children}</div>;
 }
 
-export function TimeTableCell({ value, children, onClick, header }) {
-  return <div className={classnames("flex-table-cell", 'time', header ? 'cell-header' : '')} onClick={()=>{
-    onClick()
-  }}>{value || children}</div>;
+export function TimeTableCell({ value, children, onCellClick, header, placeholder }) {
+  return (
+    <div
+      className={classnames('flex-table-cell', 'time', header ? 'cell-header' : '')}
+      placeholder={placeholder}
+      onClick={() => {
+        onCellClick();
+      }}
+    >
+      {value || children}
+    </div>
+  );
 }
 
 export function TimeTable({ children }) {
-  return <div className="flex-table">{children}</div>;
+  return <div className='flex-table'>{children}</div>;
 }

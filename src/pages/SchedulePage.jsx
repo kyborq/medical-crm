@@ -16,11 +16,13 @@ import { RightSidebar } from '../components/containers/RightSidebar';
 import { TimeTable, TimeTableRow, TimeTableCell } from '../components/TimeTable';
 import { CellCard } from '../components/CellCard';
 import { Modal } from '../components/Modal';
+import { SelectBox } from '../components/SelectBox';
+import { RecordForm } from '../components/forms/RecordForm';
 
 const scheduleList = [
   {
     doctorid: 1,
-    doctor: 'Иванов И. И.',
+    doctor: 'Иванов Иван Иванович',
     records: [
       {
         id: 1,
@@ -56,6 +58,10 @@ const scheduleList = [
 export function SchedulePage() {
   const [currentDate, setDate] = useState(moment().format('yyyy-MM-DD'));
   const [modalOpened, setModalOpened] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
+
+  const [selectedTime, selectTime] = useState();
+  const [selectedDoctor, selectDoctor] = useState();
 
   const generateTimeGrid = (start, end, interval) => {
     const startTime = moment(start, 'HHmm');
@@ -79,40 +85,52 @@ export function SchedulePage() {
   };
 
   const timeGrid = generateTimeGrid('08:00', '21:00', 30);
+
   return (
     <Page>
       <Sidebar />
 
       <Wrap>
-        <Header title={'Расписание на ' + moment(currentDate).format('LL')}> 
-        <span className="field-label">Выбор даты</span>
-        <input
-                type="date"
-                className="form-field"
-                value={currentDate}
-                onChange={(e) => {
-                  setDate(e.target.value);
-                }}
-              />
+        <Header title={'Расписание на ' + moment(currentDate).format('LL')}>
+          <span className='field-label'>Выбор даты</span>
+          <input
+            type='date'
+            className='form-field'
+            value={currentDate}
+            onChange={(e) => {
+              setDate(e.target.value);
+            }}
+          />
         </Header>
 
         <Container>
           <Content>
             <TimeTable>
               <TimeTableRow header>
-                <TimeTableCell value="Время" />
+                <TimeTableCell value='' />
+                {/* TODO: при запросе из БД будут полные имена докторов и их нужно перевести в краткую форму вот тут */}
                 {scheduleList.map((schedule) => (
-                  <TimeTableCell value={schedule.doctor} />
+                  <TimeTableCell key={schedule.doctorid} value={schedule.doctor} />
                 ))}
               </TimeTableRow>
 
               {timeGrid.map((time) => {
                 return (
                   <TimeTableRow>
-                    <TimeTableCell value={time} header />
+                    <TimeTableCell key={time} value={time} header />
                     {scheduleList.map((schedule) => {
-                      const record = schedule.records.find((record) => record.time === time && record.date === currentDate);
-                      return <TimeTableCell value={record ? <CellCard text={record.name} /> : ''} onClick={showModal} />;
+                      const record = schedule.records.find(
+                        (record) => record.time === time && record.date === currentDate
+                      );
+                      return (
+                        <TimeTableCell
+                          placeholder='+'
+                          value={record ? <CellCard text={record.name} /> : ''}
+                          onCellClick={() => {
+                            !record ? selectTime(time) & selectDoctor(schedule.doctor) & setShowAddModal(true) : null;
+                          }}
+                        />
+                      );
                     })}
                   </TimeTableRow>
                 );
@@ -122,26 +140,17 @@ export function SchedulePage() {
         </Container>
       </Wrap>
 
-      <Modal
-        title="Modal"
-        isOpen={modalOpened}
-        onClose={() => {
-          setModalOpened(false);
-        }}
-      >
-        <span className="field-label">Дата</span>
-        <input type="date" className="form-field" />
-        <span className="field-label">Время</span>
-        <input type="time" className="form-field" />
-        <span className="field-label">Врач</span>
-        <input type="text" className="form-field" />
-        <span className="field-label">Услуга</span>
-        <select className="form-field">
-          <option value=""></option>
-        </select>
-
-        <button className="form-button">Записать</button>
-      </Modal>
+      {showAddModal ? (
+        <Modal
+          title='Modal'
+          isOpen={modalOpened}
+          onClose={() => {
+            setShowAddModal(false);
+          }}
+        >
+          <RecordForm selDate={currentDate} selTime={selectedTime} selDoctor={selectedDoctor} />
+        </Modal>
+      ) : null}
     </Page>
   );
 }
