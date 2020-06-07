@@ -63,8 +63,22 @@ export function SchedulePage() {
   const [selectedTime, selectTime] = useState();
   const [selectedDoctor, selectDoctor] = useState();
 
+  const [records, setRecords] = useState([]);
+
   // TODO: Добавить выполнение ГЕТ запроса для расписания
-  useEffect(() => {});
+  useEffect(() => {
+    axios
+      .get('http://localhost/schedule')
+      .then(function (response) {
+        const data = response.data;
+        if (data.message === 'ok') {
+          setRecords(data.content);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   const generateTimeGrid = (start, end, interval) => {
     const startTime = moment(start, 'HHmm');
@@ -84,6 +98,8 @@ export function SchedulePage() {
   };
 
   const timeGrid = generateTimeGrid('08:00', '21:00', 30);
+
+  const uniqueArr = (arr) => Array.from(new Set(arr));
 
   return (
     <Page>
@@ -107,9 +123,12 @@ export function SchedulePage() {
             <TimeTable>
               <TimeTableRow header>
                 <TimeTableCell value='' />
-                {scheduleList.map((schedule) => (
+                {/* {scheduleList.map((schedule) => (
                   <TimeTableCell key={schedule.doctorid} value={schedule.doctor} />
-                ))}
+                ))} */}
+                {records.map((record) => {
+                  return <TimeTableCell key={record.record_id} value={record.doctor} />;
+                })}
               </TimeTableRow>
 
               {timeGrid.map((time) => {
