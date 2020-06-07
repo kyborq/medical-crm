@@ -84,16 +84,18 @@ app.post('/stuff', function (req, res) {
 });
 
 app.post('/records', function (req, res) {
+  console.log(req.body);
   const query =
-    'INSERT INTO `records`(`clinic_id`, `datetime`, `service_id`, `client_id`, `stuff_id`) VALUES (`1,"' +
+    'INSERT INTO `records` (`clinic_id`, `datetime`, `service_id`, `client_id`, `stuff_id`) VALUES (1, "' +
     req.body.datetime +
-    '",' +
-    req.body.serviceID +
+    '", ' +
+    req.body.ser +
+    ', ' +
+    req.body.client +
     ',' +
-    req.body.clientID +
-    ',' +
-    req.body.stuffID +
+    req.body.doc +
     ')';
+  console.log(query);
 
   connection.query(query, function (error, results, fields) {
     if (error) {

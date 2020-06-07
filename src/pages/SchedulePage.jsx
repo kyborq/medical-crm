@@ -19,43 +19,6 @@ import { Modal } from '../components/Modal';
 import { SelectBox } from '../components/SelectBox';
 import { RecordForm } from '../components/forms/RecordForm';
 
-// TODO: Убрать мокап данных расписания
-const scheduleList = [
-  {
-    doctorid: 1,
-    doctor: 'Иванов Иван Иванович',
-    records: [
-      {
-        id: 1,
-        doctorid: 1,
-        time: '08:00',
-        date: '2020-06-02',
-        name: 'Удаление зуба',
-      },
-      {
-        id: 2,
-        doctorid: 1,
-        time: '08:30',
-        date: '2020-06-02',
-        name: 'Лечение зуба',
-      },
-    ],
-  },
-  {
-    doctorid: 2,
-    doctor: 'Lorem I. S.',
-    records: [
-      {
-        id: 3,
-        doctorid: 2,
-        time: '09:00',
-        date: '2020-06-02',
-        name: 'Вставка пломбы',
-      },
-    ],
-  },
-];
-
 export function SchedulePage() {
   const [currentDate, setDate] = useState(moment().format('yyyy-MM-DD'));
   const [showAddModal, setShowAddModal] = useState(false);
@@ -64,21 +27,39 @@ export function SchedulePage() {
   const [selectedDoctor, selectDoctor] = useState();
 
   const [records, setRecords] = useState([]);
+  const [stuffList, setStuffList] = useState([]);
 
-  // TODO: Добавить выполнение ГЕТ запроса для расписания
   useEffect(() => {
+    updateData();
+  }, []);
+
+  const updateData = () => {
     axios
       .get('http://localhost/schedule')
       .then(function (response) {
         const data = response.data;
         if (data.message === 'ok') {
+          console.log(data);
           setRecords(data.content);
         }
       })
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+
+    axios
+      .get('http://localhost/stuff')
+      .then(function (response) {
+        const data = response.data;
+        if (data.message === 'ok') {
+          console.log(data);
+          setStuffList(data.content);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   const generateTimeGrid = (start, end, interval) => {
     const startTime = moment(start, 'HHmm');
@@ -123,26 +104,27 @@ export function SchedulePage() {
             <TimeTable>
               <TimeTableRow header>
                 <TimeTableCell value='' />
-                {/* {scheduleList.map((schedule) => (
-                  <TimeTableCell key={schedule.doctorid} value={schedule.doctor} />
-                ))} */}
-                {records.map((record) => {
-                  return <TimeTableCell key={record.record_id} value={record.doctor} />;
-                })}
+                {stuffList.map((stuff) => (
+                  <TimeTableCell key={stuff.id} value={stuff.fio} />
+                ))}
               </TimeTableRow>
 
               {timeGrid.map((time) => {
                 return (
                   <TimeTableRow>
                     <TimeTableCell key={time} value={time} header />
-                    {scheduleList.map((schedule) => {
-                      const record = schedule.records.find((record) => record.time === time && record.date === currentDate);
+                    {stuffList.map((stuff) => {
+                      const record = records.find(
+                        (record) =>
+                          record.doctor_id === stuff.id && moment(record.datetime).format('HH:mm') === time && moment(record.datetime).format('yyyy-MM-DD') === currentDate
+                      );
+
                       return (
                         <TimeTableCell
                           placeholder='+'
-                          value={record ? <CellCard text={record.name} /> : ''}
+                          value={record ? <CellCard text={record.service} /> : ''}
                           onCellClick={() => {
-                            !record ? selectTime(time) & selectDoctor(schedule.doctor) & setShowAddModal(true) : null;
+                            !record ? selectTime(time) & selectDoctor(stuff.fio) & setShowAddModal(true) : null;
                           }}
                         />
                       );
@@ -162,7 +144,34 @@ export function SchedulePage() {
             setShowAddModal(false);
           }}
         >
-          <RecordForm selDate={currentDate} selTime={selectedTime} selDoctor={selectedDoctor} />
+          <RecordForm
+            selDate={currentDate}
+            selTime={selectedTime}
+            selDoctor={selectedDoctor}
+            onSubmit={(datetime, doc, ser, client) => {
+              axios
+                .post('http://localhost/records', {
+                  datetime,
+                  doc,
+                  ser,
+                  client,
+                })
+                .then(function (response) {
+                  const data = response.data;
+                  if (data.message === 'ok') {
+                    console.log(data);
+                    setShowAddModal(false);
+                    updateData();
+                  } else {
+                    console.log('ошибочка');
+                    // setError({ message: 'запрос не выполнен' });
+                  }
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+            }}
+          />
         </Modal>
       ) : null}
     </Page>

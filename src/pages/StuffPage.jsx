@@ -47,7 +47,7 @@ export function StuffPage() {
       <Sidebar />
 
       <Wrap>
-        <Header title="Персонал" />
+        <Header title='Персонал' />
 
         <Container>
           <Content>
@@ -60,7 +60,7 @@ export function StuffPage() {
           </Content>
 
           <RightSidebar>
-            <Panel title="Добавить">
+            <Panel title='Добавить'>
               <StuffForm onSubmitAdd={updateList} />
             </Panel>
           </RightSidebar>
