@@ -141,7 +141,7 @@ app.get('/services', function (req, res) {
 
 app.get('/schedule', function (req, res) {
   const query =
-    "SELECT `records`.`id` AS 'record_id', `records`.`datetime`, `records`.`stuff_id` AS 'doctor_id', `stuff`.`fio` AS 'doctor', `clients`.`fio` AS 'client', `services`.`name` AS 'service' FROM `records` INNER JOIN `stuff` ON `stuff`.`id` = `records`.`stuff_id` INNER JOIN `clients` ON `clients`.`id` = `records`.`client_id` INNER JOIN `services` ON `services`.`id` = `records`.`service_id`";
+    "SELECT `records`.`id` AS 'record_id', `records`.`datetime`, `records`.`stuff_id` AS 'doctor_id', `stuff`.`fio` AS 'doctor', `clients`.`fio` AS 'client', `services`.`name` AS 'service', `services`.`id` FROM `records` INNER JOIN `stuff` ON `stuff`.`id` = `records`.`stuff_id` INNER JOIN `clients` ON `clients`.`id` = `records`.`client_id` INNER JOIN `services` ON `services`.`id` = `records`.`service_id`";
 
   connection.query(query, function (error, result, fields) {
     if (error) {

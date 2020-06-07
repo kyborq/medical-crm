@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import axios from 'axios';
 
 import { Sidebar } from '../components/sidebar/Sidebar';
@@ -45,20 +46,20 @@ export function ClientsPage() {
       <Sidebar />
 
       <Wrap>
-        <Header title="Клиенты" />
+        <Header title='Клиенты' />
 
         <Container>
           <Content>
             <Table>
               <TableHeader values={['ФИО', 'Данные о прописке', 'Дата рождения', 'Номер телефона']} />
               {stuffList.map((stuff) => (
-                <TableRow key={stuff.id} values={[stuff.fio, stuff.registration, stuff.bday, stuff.phone]} />
+                <TableRow key={stuff.id} values={[stuff.fio, stuff.registration, moment(stuff.bday).format('yyyy-MM-DD'), stuff.phone]} />
               ))}
             </Table>
           </Content>
 
           <RightSidebar>
-            <Panel title="Добавить">
+            <Panel title='Добавить'>
               <ClientsForm onSubmitAdd={updateList} />
             </Panel>
           </RightSidebar>
