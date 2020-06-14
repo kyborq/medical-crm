@@ -7,8 +7,8 @@ const mysql = require('mysql');
 
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'user01',
-  password: '123456',
+  user: 'root',
+  password: '',
   database: 'medical',
 });
 
@@ -53,7 +53,15 @@ app.post('/services', function (req, res) {
 
 app.post('/clients', function (req, res) {
   const query =
-    'INSERT INTO `clients`(`clinic_id`, `fio`, `registration`, `bday`, `phone`) VALUES (1,"' + req.body.fio + '","' + req.body.register + '","' + req.body.birthday + '","' + req.body.phone + '")';
+    'INSERT INTO `clients`(`clinic_id`, `fio`, `registration`, `bday`, `phone`) VALUES (1,"' +
+    req.body.fio +
+    '","' +
+    req.body.register +
+    '","' +
+    req.body.birthday +
+    '","' +
+    req.body.phone +
+    '")';
 
   connection.query(query, function (error, results, fields) {
     if (error) {
@@ -66,6 +74,28 @@ app.post('/clients', function (req, res) {
 
 app.post('/stuff', function (req, res) {
   const query = 'INSERT INTO `stuff`(`clinic_id`, `fio`, `spec`, `time`) VALUES (1,"' + req.body.fio + '","' + req.body.spec + '",' + req.body.dur + ')';
+
+  connection.query(query, function (error, results, fields) {
+    if (error) {
+      res.send(JSON.stringify({ message: 'непредвиденная ошибка', error: 1 }));
+    }
+    res.send(JSON.stringify({ message: 'ok' })); // результат из result можно запихнуть в ответ
+  });
+});
+
+app.post('/records', function (req, res) {
+  console.log(req.body);
+  const query =
+    'INSERT INTO `records` (`clinic_id`, `datetime`, `service_id`, `client_id`, `stuff_id`) VALUES (1, "' +
+    req.body.datetime +
+    '", ' +
+    req.body.ser +
+    ', ' +
+    req.body.client +
+    ',' +
+    req.body.doc +
+    ')';
+  console.log(query);
 
   connection.query(query, function (error, results, fields) {
     if (error) {
@@ -100,6 +130,18 @@ app.get('/clients', function (req, res) {
 
 app.get('/services', function (req, res) {
   const query = 'SELECT * FROM services WHERE `clinic_id`=1';
+
+  connection.query(query, function (error, result, fields) {
+    if (error) {
+      res.send(JSON.stringify({ message: 'неожиданная ошибка', error: 1 }));
+    }
+    res.send(JSON.stringify({ message: 'ok', content: result })); // результат из result можно запихнуть в ответ
+  });
+});
+
+app.get('/schedule', function (req, res) {
+  const query =
+    "SELECT `records`.`id` AS 'record_id', `records`.`datetime`, `records`.`stuff_id` AS 'doctor_id', `stuff`.`fio` AS 'doctor', `clients`.`fio` AS 'client', `services`.`name` AS 'service', `services`.`id` FROM `records` INNER JOIN `stuff` ON `stuff`.`id` = `records`.`stuff_id` INNER JOIN `clients` ON `clients`.`id` = `records`.`client_id` INNER JOIN `services` ON `services`.`id` = `records`.`service_id`";
 
   connection.query(query, function (error, result, fields) {
     if (error) {

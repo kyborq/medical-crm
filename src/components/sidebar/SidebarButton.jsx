@@ -1,6 +1,5 @@
 import React from 'react';
-
-const classnames = require('classnames');
+import classnames from 'classnames';
 
 import './SidebarButton.css';
 
