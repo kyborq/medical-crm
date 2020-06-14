@@ -10,6 +10,7 @@
 
 .flex-table-header .flex-table-cell {
   padding: 8px 24px;
+  text-align: left;
 }
 
 .flex-table-row {
@@ -24,7 +25,7 @@
 .flex-table-row.row-header {
   font-weight: bold;
   font-size: 14px;
-  text-align: center;
+  text-align: left;
   background: none;
   box-shadow: none;
 }
@@ -51,7 +52,7 @@
 
 .flex-table-cell.time {
   padding: 24px;
-  width: 101px;
+  width: 150px;
   display: flex;
   align-items: center;
   align-content: center;

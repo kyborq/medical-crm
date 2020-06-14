@@ -88,10 +88,10 @@ export function SchedulePage() {
 
       <Wrap>
         <Header title={'Расписание на ' + moment(currentDate).format('LL')}>
-          <span className='field-label'>Выбор даты</span>
+          <span className="field-label">Выбор даты</span>
           <input
-            type='date'
-            className='form-field'
+            type="date"
+            className="form-field"
             value={currentDate}
             onChange={(e) => {
               setDate(e.target.value);
@@ -103,7 +103,7 @@ export function SchedulePage() {
           <Content>
             <TimeTable>
               <TimeTableRow header>
-                <TimeTableCell value='' />
+                <TimeTableCell value="" />
                 {stuffList.map((stuff) => (
                   <TimeTableCell key={stuff.id} value={stuff.fio} />
                 ))}
@@ -115,14 +115,13 @@ export function SchedulePage() {
                     <TimeTableCell key={time} value={time} header />
                     {stuffList.map((stuff) => {
                       const record = records.find(
-                        (record) =>
-                          record.doctor_id === stuff.id && moment(record.datetime).format('HH:mm') === time && moment(record.datetime).format('yyyy-MM-DD') === currentDate
+                        (record) => record.doctor_id === stuff.id && moment(record.datetime).format('HH:mm') === time && moment(record.datetime).format('yyyy-MM-DD') === currentDate
                       );
 
                       return (
                         <TimeTableCell
-                          placeholder='+'
-                          value={record ? <CellCard text={record.service} /> : ''}
+                          placeholder="+"
+                          value={record ? <CellCard text={`${record.client} - ${record.service}`} /> : ''}
                           onCellClick={() => {
                             !record ? selectTime(time) & selectDoctor(stuff.fio) & setShowAddModal(true) : null;
                           }}
@@ -139,7 +138,7 @@ export function SchedulePage() {
 
       {showAddModal ? (
         <Modal
-          title='Modal'
+          title="Modal"
           onClose={() => {
             setShowAddModal(false);
           }}
