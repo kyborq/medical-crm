@@ -21,19 +21,12 @@
     "jshint": "src/"
   },
   "scripts": {
-    "server": "live-server src",
-    "stylelint": "stylelint src/**/*.css",
-    "jshint": "jshint src/",
-    "watch": "npm-watch",
-    "dev-mode": "npm-run-all --parallel server watch",
-    "postinstall": "npm i -g live-server html-validate jshint",
-    "run-webpack": "webpack --mode production",
-    "build": "npm-run-all validate-html jshint stylelint run-webpack",
-    "webpack-server": "webpack-dev-server --mode development --open --hot",
-    "backend-server": "node server/server.js"
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --mode development --open --hot",
+    "server": "node server/server.js"
   },
   "browserslist": "> 0.25%, not dead",
-  "author": "Kalagin Ivan",
+  "author": "Podyfanov Konstantin",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.9.0",
