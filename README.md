@@ -28,13 +28,19 @@ npm run webpack-server
 ```
 npm run backend-server
 ```
+
 ## Развертка на сервере
 В качестве хостинка был использован heroku
+
 Для фронтенда: https://medical-frontend.herokuapp.com/
+
 Для бэкенда: http://medical-server.herokuapp.com/
+
 
 Для хранения базы данных был использован сервис: https://remotemysql.com/
 
 ### Данные для входа
+
 login: user
+
 password: password
