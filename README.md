@@ -30,7 +30,7 @@ npm run backend-server
 ```
 
 ## Развертка на сервере
-В качестве хостинка был использован heroku
+В качестве хостинга был использован heroku
 
 Для фронтенда: https://medical-frontend.herokuapp.com/
 
