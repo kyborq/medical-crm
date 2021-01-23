@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import _ from 'lodash';
-import { ErrorMessage } from '../ErrorMessage';
-import axios from 'axios';
+import React, { useState } from "react";
+import _ from "lodash";
+import { ErrorMessage } from "../ErrorMessage";
+import axios from "axios";
 
-import { SelectBox } from '../SelectBox';
+import { SelectBox } from "../SelectBox";
 
-import './FormStyle.css';
+import "./FormStyle.css";
 
 const specList = [
-  { id: 0, name: '' },
-  { id: 1, name: 'Врач' },
-  { id: 2, name: 'Педиатр' },
-  { id: 3, name: 'Хирург' },
-  { id: 4, name: 'Логопед' },
+  { id: 0, name: "" },
+  { id: 1, name: "Врач" },
+  { id: 2, name: "Педиатр" },
+  { id: 3, name: "Хирург" },
+  { id: 4, name: "Логопед" },
 ];
 
 // Форма для добавления персонала в таблицу
@@ -24,19 +24,19 @@ export function StuffForm({ onSubmitAdd }) {
 
   const isFormValid = (fio, spec, dur) => {
     if (_.isNull(fio) && _.isNull(spec)) {
-      return { message: 'Заполните все поля' };
+      return { message: "Заполните все поля" };
     }
 
-    if ((!_.isNull(fio) && _.isEmpty(fio)) || fio.split(' ').length !== 3) {
-      return { message: 'Ф.И.О введен неверно' };
+    if ((!_.isNull(fio) && _.isEmpty(fio)) || fio.split(" ").length !== 3) {
+      return { message: "Ф.И.О введен неверно" };
     }
 
     if (!_.isNull(spec) && _.isEmpty(spec)) {
-      return { message: 'Специализация не выбрана' };
+      return { message: "Специализация не выбрана" };
     }
 
     if ((!_.isNull(dur) && !_.isInteger(dur)) || dur <= 0 || dur > 30) {
-      return { message: 'Продолжительность приема введена неверно' };
+      return { message: "Продолжительность приема введена неверно" };
     }
 
     return null;
@@ -58,7 +58,7 @@ export function StuffForm({ onSubmitAdd }) {
           type="text"
           className="form-field"
           placeholder="ФИО"
-          value={fio || ''}
+          value={fio || ""}
           onChange={(e) => {
             setFio(e.target.value);
           }}
@@ -81,7 +81,7 @@ export function StuffForm({ onSubmitAdd }) {
           placeholder="Время приема"
           value={dur || 0}
           onChange={(e) => {
-            if (e.target.value === '') e.target.value = '0';
+            if (e.target.value === "") e.target.value = "0";
             setDur(parseInt(e.target.value));
           }}
         />
@@ -90,21 +90,21 @@ export function StuffForm({ onSubmitAdd }) {
           onClick={() => {
             if (_.isNull(error)) {
               axios
-                .post('http://localhost/stuff', {
+                .post("https://medical-crm-server.herokuapp.com/stuff", {
                   fio,
                   spec,
                   dur,
                 })
                 .then(function (response) {
                   const data = response.data;
-                  if (data.message === 'ok') {
+                  if (data.message === "ok") {
                     console.log(data);
                     setFio(null);
                     setSpec(null);
                     setDur(null);
                     onSubmitAdd();
                   } else {
-                    setError({ message: 'запрос не выполнен' });
+                    setError({ message: "запрос не выполнен" });
                   }
                 })
                 .catch(function (error) {

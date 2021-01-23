@@ -1,26 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import moment from 'moment';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import moment from "moment";
+import axios from "axios";
 
-moment.locale('ru');
+import { Sidebar } from "../components/sidebar/Sidebar";
+import { Header } from "../components/Header";
+import { Panel } from "../components/Panel";
+import { Wrap } from "../components/containers/Wrap";
+import { Container } from "../components/containers/Container";
+import { Content } from "../components/containers/Content";
+import { Page } from "../components/containers/Page";
+import { RightSidebar } from "../components/containers/RightSidebar";
 
-import { Sidebar } from '../components/sidebar/Sidebar';
-import { Header } from '../components/Header';
-import { Panel } from '../components/Panel';
-import { Wrap } from '../components/containers/Wrap';
-import { Container } from '../components/containers/Container';
-import { Content } from '../components/containers/Content';
-import { Page } from '../components/containers/Page';
-import { RightSidebar } from '../components/containers/RightSidebar';
+import {
+  TimeTable,
+  TimeTableRow,
+  TimeTableCell,
+} from "../components/TimeTable";
+import { CellCard } from "../components/CellCard";
+import { Modal } from "../components/Modal";
+import { SelectBox } from "../components/SelectBox";
+import { RecordForm } from "../components/forms/RecordForm";
 
-import { TimeTable, TimeTableRow, TimeTableCell } from '../components/TimeTable';
-import { CellCard } from '../components/CellCard';
-import { Modal } from '../components/Modal';
-import { SelectBox } from '../components/SelectBox';
-import { RecordForm } from '../components/forms/RecordForm';
+moment.locale("ru");
 
 export function SchedulePage() {
-  const [currentDate, setDate] = useState(moment().format('yyyy-MM-DD'));
+  const [currentDate, setDate] = useState(moment().format("yyyy-MM-DD"));
   const [showAddModal, setShowAddModal] = useState(false);
 
   const [selectedTime, selectTime] = useState();
@@ -35,10 +39,10 @@ export function SchedulePage() {
 
   const updateData = () => {
     axios
-      .get('http://localhost/schedule')
+      .get("https://medical-crm-server.herokuapp.com/schedule")
       .then(function (response) {
         const data = response.data;
-        if (data.message === 'ok') {
+        if (data.message === "ok") {
           console.log(data);
           setRecords(data.content);
         }
@@ -48,10 +52,10 @@ export function SchedulePage() {
       });
 
     axios
-      .get('http://localhost/stuff')
+      .get("https://medical-crm-server.herokuapp.com/stuff")
       .then(function (response) {
         const data = response.data;
-        if (data.message === 'ok') {
+        if (data.message === "ok") {
           console.log(data);
           setStuffList(data.content);
         }
@@ -62,23 +66,25 @@ export function SchedulePage() {
   };
 
   const generateTimeGrid = (start, end, interval) => {
-    const startTime = moment(start, 'HHmm');
-    const endTime = moment(end, 'HHmm');
+    const startTime = moment(start, "HHmm");
+    const endTime = moment(end, "HHmm");
 
     const timeArray = [];
 
-    let tmpTime = startTime.format('HH:mm');
+    let tmpTime = startTime.format("HH:mm");
 
-    while (tmpTime < endTime.format('HH:mm')) {
+    while (tmpTime < endTime.format("HH:mm")) {
       timeArray.push(tmpTime);
-      tmpTime = moment(tmpTime, 'HHmm').add(interval, 'minutes').format('HH:mm');
+      tmpTime = moment(tmpTime, "HHmm")
+        .add(interval, "minutes")
+        .format("HH:mm");
     }
 
-    timeArray.push(endTime.format('HH:mm'));
+    timeArray.push(endTime.format("HH:mm"));
     return timeArray;
   };
 
-  const timeGrid = generateTimeGrid('08:00', '21:00', 30);
+  const timeGrid = generateTimeGrid("08:00", "21:00", 30);
 
   const uniqueArr = (arr) => Array.from(new Set(arr));
 
@@ -87,7 +93,7 @@ export function SchedulePage() {
       <Sidebar />
 
       <Wrap>
-        <Header title={'Расписание на ' + moment(currentDate).format('LL')}>
+        <Header title={"Расписание на " + moment(currentDate).format("LL")}>
           <span className="field-label">Выбор даты</span>
           <input
             type="date"
@@ -109,21 +115,38 @@ export function SchedulePage() {
                 ))}
               </TimeTableRow>
 
-              {timeGrid.map((time) => {
+              {timeGrid.map((time, j) => {
                 return (
                   <TimeTableRow>
-                    <TimeTableCell key={time} value={time} header />
+                    <TimeTableCell key={j} value={time} header />
                     {stuffList.map((stuff) => {
                       const record = records.find(
-                        (record) => record.doctor_id === stuff.id && moment(record.datetime).format('HH:mm') === time && moment(record.datetime).format('yyyy-MM-DD') === currentDate
+                        (record) =>
+                          record.doctor_id === stuff.id &&
+                          moment.utc(record.datetime).format("HH:mm") ===
+                            time &&
+                          moment.utc(record.datetime).format("yyyy-MM-DD") ===
+                            currentDate
                       );
 
                       return (
                         <TimeTableCell
                           placeholder="+"
-                          value={record ? <CellCard text={`${record.client} - ${record.service}`} /> : ''}
+                          value={
+                            record ? (
+                              <CellCard
+                                text={`${record.client} - ${record.service}`}
+                              />
+                            ) : (
+                              ""
+                            )
+                          }
                           onCellClick={() => {
-                            !record ? selectTime(time) & selectDoctor(stuff.fio) & setShowAddModal(true) : null;
+                            if (!record) {
+                              selectTime(time);
+                              selectDoctor(stuff.fio);
+                              setShowAddModal(true);
+                            }
                           }}
                         />
                       );
@@ -148,8 +171,9 @@ export function SchedulePage() {
             selTime={selectedTime}
             selDoctor={selectedDoctor}
             onSubmit={(datetime, doc, ser, client) => {
+              console.log(datetime, doc, ser, client);
               axios
-                .post('http://localhost/records', {
+                .post("https://medical-crm-server.herokuapp.com/records", {
                   datetime,
                   doc,
                   ser,
@@ -157,12 +181,13 @@ export function SchedulePage() {
                 })
                 .then(function (response) {
                   const data = response.data;
-                  if (data.message === 'ok') {
+                  if (data.message === "ok") {
                     console.log(data);
                     setShowAddModal(false);
                     updateData();
                   } else {
-                    console.log('ошибочка');
+                    console.log(data);
+                    console.log("ошибочка");
                     // setError({ message: 'запрос не выполнен' });
                   }
                 })

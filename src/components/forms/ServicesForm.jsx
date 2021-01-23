@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import _ from 'lodash';
-import { ErrorMessage } from '../ErrorMessage';
-import axios from 'axios';
+import React, { useState } from "react";
+import _ from "lodash";
+import { ErrorMessage } from "../ErrorMessage";
+import axios from "axios";
 
-import './FormStyle.css';
+import "./FormStyle.css";
 
 export function ServicesForm({ onSubmitAdd }) {
   const [service, setService] = useState(null);
@@ -13,19 +13,22 @@ export function ServicesForm({ onSubmitAdd }) {
 
   const isFormValid = (service, cost, duration) => {
     if (_.isNull(service) || _.isNull(cost) || _.isNull(duration)) {
-      return { message: 'Заполните все поля' };
+      return { message: "Заполните все поля" };
     }
 
     if (!_.isNull(service) && _.isEmpty(service)) {
-      return { message: 'Название введено неверно', currentValue: service };
+      return { message: "Название введено неверно", currentValue: service };
     }
 
     if (!_.isNull(cost) && !_.isEmpty(cost)) {
-      return { message: 'Стоимость введена неверно', currentValue: cost };
+      return { message: "Стоимость введена неверно", currentValue: cost };
     }
 
     if (!_.isNull(duration) && !_.isEmpty(duration)) {
-      return { message: 'Продолжительность введена неверно', currentValue: duration };
+      return {
+        message: "Продолжительность введена неверно",
+        currentValue: duration,
+      };
     }
 
     return null;
@@ -47,7 +50,7 @@ export function ServicesForm({ onSubmitAdd }) {
           type="text"
           className="form-field"
           placeholder="Название услуги"
-          value={service || ''}
+          value={service || ""}
           onChange={(e) => {
             setService(e.target.value);
           }}
@@ -59,7 +62,7 @@ export function ServicesForm({ onSubmitAdd }) {
           min="0"
           className="form-field"
           placeholder="Цена"
-          value={cost || ''}
+          value={cost || ""}
           onChange={(e) => {
             setCost(parseInt(e.target.value));
           }}
@@ -72,7 +75,7 @@ export function ServicesForm({ onSubmitAdd }) {
           max="60"
           className="form-field"
           placeholder="Продолжительность"
-          value={duration || ''}
+          value={duration || ""}
           onChange={(e) => {
             setDuration(parseInt(e.target.value));
           }}
@@ -82,21 +85,21 @@ export function ServicesForm({ onSubmitAdd }) {
           onClick={() => {
             if (_.isNull(error)) {
               axios
-                .post('http://localhost/services', {
+                .post("https://medical-crm-server.herokuapp.com/services", {
                   service,
                   cost,
                   duration,
                 })
                 .then(function (response) {
                   const data = response.data;
-                  if (data.message === 'ok') {
+                  if (data.message === "ok") {
                     console.log(data);
                     setService(null);
                     setCost(null);
                     setDuration(null);
                     onSubmitAdd();
                   } else {
-                    setError({ message: 'запрос не выполнен' });
+                    setError({ message: "запрос не выполнен" });
                   }
                 })
                 .catch(function (error) {

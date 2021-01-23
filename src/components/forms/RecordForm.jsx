@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import moment from 'moment';
-import axios from 'axios';
-import _ from 'lodash';
+import React, { useState, useEffect } from "react";
+import moment from "moment";
+import axios from "axios";
+import _ from "lodash";
 
-import './FormStyle.css';
+import "./FormStyle.css";
 
-import { SelectBox } from '../SelectBox';
-import { ErrorMessage } from '../ErrorMessage';
+import { SelectBox } from "../SelectBox";
+import { ErrorMessage } from "../ErrorMessage";
 
 export function RecordForm({ selDate, selTime, selDoctor, onSubmit }) {
-  const [date, setDate] = useState(moment(selDate, 'YYYY-MM-DD').format('YYYY-MM-DD'));
-  const [time, setTime] = useState(moment(selTime, 'HH:mm').format('HH:mm'));
+  const [date, setDate] = useState(
+    moment(selDate, "YYYY-MM-DD").format("YYYY-MM-DD")
+  );
+  const [time, setTime] = useState(moment(selTime, "HH:mm").format("HH:mm"));
   const [doctor, setDoctor] = useState(selDoctor || null);
   const [service, setService] = useState(null);
   const [client, setClient] = useState(null);
@@ -23,10 +25,10 @@ export function RecordForm({ selDate, selTime, selDoctor, onSubmit }) {
 
   useEffect(() => {
     axios
-      .get('http://localhost/stuff')
+      .get("https://medical-crm-server.herokuapp.com/stuff")
       .then((response) => {
         const data = response.data;
-        if (data.message === 'ok') {
+        if (data.message === "ok") {
           setStuffList(data.content);
         }
       })
@@ -35,10 +37,10 @@ export function RecordForm({ selDate, selTime, selDoctor, onSubmit }) {
       });
 
     axios
-      .get('http://localhost/services')
+      .get("https://medical-crm-server.herokuapp.com/services")
       .then((response) => {
         const data = response.data;
-        if (data.message === 'ok') {
+        if (data.message === "ok") {
           setServiceList(data.content);
         }
       })
@@ -47,10 +49,10 @@ export function RecordForm({ selDate, selTime, selDoctor, onSubmit }) {
       });
 
     axios
-      .get('http://localhost/clients')
+      .get("https://medical-crm-server.herokuapp.com/clients")
       .then((response) => {
         const data = response.data;
-        if (data.message === 'ok') {
+        if (data.message === "ok") {
           setClientsList(data.content);
         }
       })
@@ -60,28 +62,34 @@ export function RecordForm({ selDate, selTime, selDoctor, onSubmit }) {
   }, []);
 
   const isFormValid = (date, time, doc, ser, client) => {
-    if (_.isNull(date) || _.isNull(time) || _.isNull(doc) || _.isNull(ser) || _.isNull(client)) {
-      return { message: 'Заполните все поля' };
+    if (
+      _.isNull(date) ||
+      _.isNull(time) ||
+      _.isNull(doc) ||
+      _.isNull(ser) ||
+      _.isNull(client)
+    ) {
+      return { message: "Заполните все поля" };
     }
 
     if (!_.isNull(date) && _.isEmpty(date)) {
-      return { message: 'Дата введена неверно', currentValue: date };
+      return { message: "Дата введена неверно", currentValue: date };
     }
 
     if (!_.isNull(time) && _.isEmpty(time)) {
-      return { message: 'Время введено неверно', currentValue: time };
+      return { message: "Время введено неверно", currentValue: time };
     }
 
     if (!_.isNull(doc) && _.isEmpty(doc)) {
-      return { message: 'Врач не выбран', currentValue: doc };
+      return { message: "Врач не выбран", currentValue: doc };
     }
 
     if (!_.isNull(client) && _.isEmpty(client)) {
-      return { message: 'Клиент не выбран', currentValue: client };
+      return { message: "Клиент не выбран", currentValue: client };
     }
 
     if (!_.isNull(ser) && _.isEmpty(ser)) {
-      return { message: 'Услуга не выбрана', currentValue: ser };
+      return { message: "Услуга не выбрана", currentValue: ser };
     }
 
     return null;
@@ -96,26 +104,26 @@ export function RecordForm({ selDate, selTime, selDoctor, onSubmit }) {
         setError(err ? err : null);
       }}
     >
-      <span className='field-label'>Дата</span>
+      <span className="field-label">Дата</span>
       <input
-        type='date'
-        className='form-field'
-        value={date || ''}
+        type="date"
+        className="form-field"
+        value={date || ""}
         onChange={(e) => {
           setDate(e.target.value);
         }}
       />
-      <span className='field-label'>Время</span>
+      <span className="field-label">Время</span>
       <input
-        type='time'
-        className='form-field'
+        type="time"
+        className="form-field"
         value={time}
         onChange={(e) => {
           setTime(e.target.value);
         }}
       />
 
-      <span className='field-label'>Врач</span>
+      <span className="field-label">Врач</span>
       <SelectBox
         items={stuffList.map((stuff) => stuff.fio)}
         value={doctor}
@@ -124,7 +132,7 @@ export function RecordForm({ selDate, selTime, selDoctor, onSubmit }) {
         }}
       />
 
-      <span className='field-label'>Клиент</span>
+      <span className="field-label">Клиент</span>
       <SelectBox
         items={clientsList.map((client) => client.fio)}
         value={client}
@@ -133,7 +141,7 @@ export function RecordForm({ selDate, selTime, selDoctor, onSubmit }) {
         }}
       />
 
-      <span className='field-label'>Услуга</span>
+      <span className="field-label">Услуга</span>
       <SelectBox
         items={servicesList.map((service) => service.name)}
         value={service}
@@ -145,14 +153,17 @@ export function RecordForm({ selDate, selTime, selDoctor, onSubmit }) {
       {error && error.message && <ErrorMessage text={error.message} />}
 
       <button
-        className='form-button'
+        className="form-button"
         onClick={() => {
           if (_.isNull(isFormValid(date, time, doctor, service, client))) {
             const ser_id = servicesList.find((ser) => ser.name === service).id;
             const client_id = clientsList.find((cli) => client === cli.fio).id;
             const doc_id = stuffList.find((stuff) => doctor === stuff.fio).id;
-            const datetime = `${date}T${time}:00.000Z`;
-
+            const datetime = moment(
+              `${date} ${time}`,
+              "YYYY-MM-DD HH:mm"
+            ).format("YYYY-MM-DD HH:mm");
+            console.log(date, time);
             onSubmit(datetime, doc_id, ser_id, client_id);
           }
         }}

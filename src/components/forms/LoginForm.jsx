@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { ErrorMessage } from '../ErrorMessage';
-import _ from 'lodash';
-import axios from 'axios';
+import React, { useState } from "react";
+import { ErrorMessage } from "../ErrorMessage";
+import _ from "lodash";
+import axios from "axios";
 
-import './FormStyle.css';
+import "./FormStyle.css";
 
 export function LoginForm() {
   const [login, setLogin] = useState(null);
@@ -12,15 +12,15 @@ export function LoginForm() {
 
   const isFormValid = (login, password) => {
     if (_.isNull(login) || _.isNull(password)) {
-      return { message: 'Заполните все поля' };
+      return { message: "Заполните все поля" };
     }
 
     if (_.isNull(login) || _.isEmpty(login)) {
-      return { message: 'Логин введен неверно' };
+      return { message: "Логин введен неверно" };
     }
 
     if (_.isNull(password) || _.isEmpty(password) || password.length < 6) {
-      return { message: 'Пароль введен неверно' };
+      return { message: "Пароль введен неверно" };
     }
 
     return null;
@@ -64,21 +64,21 @@ export function LoginForm() {
           className="form-button"
           onClick={() => {
             axios
-              .post('http://localhost/auth', {
+              .post("https://medical-crm-server.herokuapp.com/auth", {
                 login,
                 password,
               })
               .then(function (response) {
                 const data = response.data;
 
-                if (data.message === 'ok') {
-                  sessionStorage.setItem('login', data.user_id);
+                if (data.message === "ok") {
+                  sessionStorage.setItem("login", data.user_id);
                   console.log(data);
 
-                  location.href = '/dashboard';
+                  window.location.href = "/dashboard";
                 } else {
-                  console.log('ошибка входа');
-                  setError({ message: 'пользователь не найден' });
+                  console.log("ошибка входа");
+                  setError({ message: "пользователь не найден" });
                 }
               })
               .catch(function (error) {

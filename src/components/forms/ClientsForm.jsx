@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import _ from 'lodash';
+import React, { useState } from "react";
+import axios from "axios";
+import _ from "lodash";
 
-import { ErrorMessage } from '../ErrorMessage';
+import { ErrorMessage } from "../ErrorMessage";
 
-import './FormStyle.css';
+import "./FormStyle.css";
 
 export function ClientsForm({ onSubmitAdd }) {
   const [fio, setFio] = useState(null);
@@ -14,24 +14,35 @@ export function ClientsForm({ onSubmitAdd }) {
   const [error, setError] = useState(null);
 
   const isFormValid = (fio, registration, birthday, phone) => {
-    if (_.isNull(fio) || _.isNull(registration) || _.isNull(birthday) || _.isNull(phone)) {
-      return { message: 'Заполните все поля' };
+    if (
+      _.isNull(fio) ||
+      _.isNull(registration) ||
+      _.isNull(birthday) ||
+      _.isNull(phone)
+    ) {
+      return { message: "Заполните все поля" };
     }
 
-    if ((!_.isNull(fio) && _.isEmpty(fio)) || (!_.isNull(fio) && fio.split(' ').length !== 3)) {
-      return { message: 'Ф.И.О введен неверно' };
+    if (
+      (!_.isNull(fio) && _.isEmpty(fio)) ||
+      (!_.isNull(fio) && fio.split(" ").length !== 3)
+    ) {
+      return { message: "Ф.И.О введен неверно" };
     }
 
     if (!_.isNull(registration) && _.isEmpty(registration)) {
-      return { message: 'Данные о регистрации введены неверно' };
+      return { message: "Данные о регистрации введены неверно" };
     }
 
-    if (!_.isNull(birthday) && birthday.split('-').length !== 3) {
-      return { message: 'Дата рождения введена неверно', currentValue: birthday.split('-').length !== 3 };
+    if (!_.isNull(birthday) && birthday.split("-").length !== 3) {
+      return {
+        message: "Дата рождения введена неверно",
+        currentValue: birthday.split("-").length !== 3,
+      };
     }
 
     if (!_.isNull(phone) && _.isEmpty(phone)) {
-      return { message: 'Номер телефона введен неверно' };
+      return { message: "Номер телефона введен неверно" };
     }
 
     return null;
@@ -53,7 +64,7 @@ export function ClientsForm({ onSubmitAdd }) {
           type="text"
           className="form-field"
           placeholder="ФИО"
-          value={fio || ''}
+          value={fio || ""}
           onChange={(e) => {
             setFio(e.target.value);
           }}
@@ -64,7 +75,7 @@ export function ClientsForm({ onSubmitAdd }) {
           type="text"
           className="form-field"
           placeholder="Данные о прописке"
-          value={register || ''}
+          value={register || ""}
           onChange={(e) => {
             setRegister(e.target.value);
           }}
@@ -75,7 +86,7 @@ export function ClientsForm({ onSubmitAdd }) {
           type="date"
           className="form-field"
           placeholder="Дата рождения"
-          value={birthday || ''}
+          value={birthday || ""}
           onChange={(e) => {
             setBirthday(e.target.value);
           }}
@@ -86,18 +97,18 @@ export function ClientsForm({ onSubmitAdd }) {
           type="text"
           className="form-field"
           placeholder="Номер телефона"
-          value={phone || ''}
+          value={phone || ""}
           onChange={(e) => {
             if (e.target.value.length < 3) {
-              e.target.value = '+7(';
+              e.target.value = "+7(";
             }
 
             if (e.target.value.length === 6) {
-              e.target.value += ')';
+              e.target.value += ")";
             }
 
             if (e.target.value.length === 10 || e.target.value.length === 13) {
-              e.target.value += '-';
+              e.target.value += "-";
             }
 
             if (e.target.value.length > 16) {
@@ -112,7 +123,7 @@ export function ClientsForm({ onSubmitAdd }) {
           onClick={() => {
             if (_.isNull(error)) {
               axios
-                .post('http://localhost/clients', {
+                .post("https://medical-crm-server.herokuapp.com/clients", {
                   fio,
                   register,
                   birthday,
@@ -120,7 +131,7 @@ export function ClientsForm({ onSubmitAdd }) {
                 })
                 .then(function (response) {
                   const data = response.data;
-                  if (data.message === 'ok') {
+                  if (data && data.message === "ok") {
                     console.log(data);
                     setFio(null);
                     setRegister(null);
@@ -132,7 +143,7 @@ export function ClientsForm({ onSubmitAdd }) {
                   }
                 })
                 .catch(function (error) {
-                  console.log(data);
+                  // console.log(data);
                   console.log(error);
                 });
             }
